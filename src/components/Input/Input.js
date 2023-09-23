@@ -2,8 +2,7 @@ import styles from "./Input.module.css";
 import cn from "classnames";
 import React, { useState, useEffect } from "react";
 import Find from "../../images/find.svg";
-import Find_focused from "../../images/find_focused.svg";
-
+import Eye from "../../images/eye.svg";
 export const Input = ({
   state = "default",
   hint,
@@ -79,13 +78,13 @@ export const Input = ({
             readOnly={isDisabledEmpty || isDisabledFilled}
             {...props}
           />
-          {/*{type === "password" ? (
-            <Eye className={cn(styles.eyeIcon)} onClick={togglePasswordVisibility} />
+          {type === "password" ? (
+            <img src={Eye} alt={"eye"} className={cn(styles.eyeIcon)} onClick={togglePasswordVisibility} />
           ) : (
             <></>
-          )}*/}
+          )}
           {type === "find" ? (
-            <img src={isFocused ? Find : Find_focused} alt={"find"} className={cn(styles.findIcon)} onClick={togglePasswordVisibility} />
+            <img src={Find} alt={"find"} className={cn(styles.findIcon)} onClick={togglePasswordVisibility} />
           ) : (
             <></>
           )}

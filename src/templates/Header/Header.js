@@ -6,6 +6,7 @@ import buttonStyle from "../../components/Button/Button.module.css"
 import {Input} from "../../components/Input/Input";
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import InputStyle from "../../components/Input/Input.module.css"
 export const Header = ({
   className,
   ...props
@@ -71,8 +72,8 @@ export const Header = ({
                                 </Link>
                             </div>
                           )}
-                <Input placeholder={"Фильмы, новинки..."} type={"find"} className={header.input}/>
-                <Button state={"default"} type={"text"} className={cn(header.textButton, className)}>Новости</Button>
+                <Input placeholder={"Фильмы, новинки..."} type={"find"} className={cn(InputStyle.input,header.input)}/>
+                <Button state={"default"} type={"text"} className={cn(header.textButton)}>Новости</Button>
             </div>
             <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>Добавить статью</Button>
         </nav>

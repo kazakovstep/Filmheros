@@ -7,6 +7,7 @@ export const Main = ({ type, ...props }) => {
           <div
               className={cn({
                   [styles.main]: type === "main",
+                  [styles.auth]: type === "auth"
               })}
               {...props}
             ></div>

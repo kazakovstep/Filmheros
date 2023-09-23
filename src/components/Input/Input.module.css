@@ -15,6 +15,12 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+.eyeIcon{
+    position: absolute;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
 .inputContainer{
     display: flex;
     align-items: flex-end

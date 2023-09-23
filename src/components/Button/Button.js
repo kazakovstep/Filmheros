@@ -42,9 +42,7 @@ export const Button = ({
       ) : (
         <img
             src={icon_url}
-            alt={""}
-            width={icon_url.includes("arrow") ? 24 : 30}
-            height={icon_url.includes("arrow")  ? 24 : 30}
+            alt={"icon"}
         />
       )}
       {children}

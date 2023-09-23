@@ -18,7 +18,7 @@ nav{
   margin: 0 2% 0 2%;
 }
 .addButton{
-  width:35%!important;
+  width:40%!important;
 }
 .textButton{
   color: var(--primary-white)!important;
@@ -26,20 +26,7 @@ nav{
 .input{
   justify-content: center;
   align-self: center!important;
-  width: 40%!important;
-}
-input{
-  background-color: var(--primary-dark-grey) !important;
-  border-color: var(--primary-dark-grey) !important;
-  color:var(--primary-light-grey) !important;
-}
-input::placeholder{
-  color: var(--primary-light-grey)!important;
-  font-family: 'Manrope', sans-serif;
-}
-input:focus{
-  background-color: var(--primary-white) !important;
-  color:var(--primary-black) !important;
+  width: 60%!important;
 }
 .items{
   display: inline-flex;
