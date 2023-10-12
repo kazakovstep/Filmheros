@@ -1,0 +1,49 @@
+@media(max-width: 960px){
+    .addbutton{
+        margin-left: 60%!important;
+    }
+}
+.input_form_ver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    margin-top: 2.5rem;
+}
+.text{
+    margin-top: 1.25rem;
+}
+.input_container{
+    margin-top: 1.75rem;
+    width: 100%;
+}
+.film_form{
+    display: flex;
+    gap:2rem;
+}
+.select{
+    margin-top: 1.4rem;
+}
+.select p{
+    margin-top: 0!important;
+}
+.badge_list{
+    margin-top: 1rem;
+    display: flex;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    gap:1rem;
+}
+.checkbox_form{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+}
+.addbutton{
+    display: flex;
+    margin-left: 30rem;
+}
+.pubbutton{
+    margin: 1.5rem 0;
+}

@@ -1,31 +1,50 @@
+import styles from "./Menu.module.css";
 import cn from "classnames";
-import header from "./Header.module.css";
-import {Logo} from "../../components/Logo/Logo";
-import {Button} from "../../components/Button/Button";
-import buttonStyle from "../../components/Button/Button.module.css"
-import {Input} from "../../components/Input/Input";
-import {useState} from "react";
+import { useState } from "react";
+import MenuSVG from "../../images/menu.svg"
+import header from "../../templates/Header/Header.module.css";
+import {Button} from "../Button/Button";
 import {Link} from "react-router-dom";
-import InputStyle from "../../components/Input/Input.module.css"
-import {Menu} from "../../components/Menu/Menu"
-export const Header = ({
+import {Input} from "../Input/Input";
+import InputStyle from "../Input/Input.module.css";
+import buttonStyle from "../Button/Button.module.css";
+export const Menu = ({
+  children,
   className,
   ...props
 }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
 
-  const handleDropdownToggle = () => {
-    setShowDropdown(!showDropdown);
-  };
+    const [isClicked, setClicked] = useState(false);
 
-  return (
-    <header className={cn(header.header, className)}>
-        <Logo/>
-        <nav className={header.nav_comp}>
-            <div className={cn(header.items, className)}>
-                <Button state={"default"} type={"text"} className={cn(header.textButton, className)} onClick={handleDropdownToggle}>Каталог</Button>
-                {showDropdown && (
-                            <div className={cn(header.dropdown)}>
+    const handleIsClicked = () => {
+        setClicked(!isClicked)
+    }
+
+    const [isCatalog, setIsCatalog] = useState(false);
+
+    const handleIsCatalog = () => {
+        setIsCatalog(!isCatalog)
+    }
+
+  return(
+      <>
+          <img src={MenuSVG} alt={"menu"} width={40} height={40} onClick={handleIsClicked}
+          className={cn({
+              [styles.img]: !isClicked,
+              [styles.img_clicked]: isClicked
+          })}/>
+          {isClicked ?
+            <>
+                <div className={styles.menu}>
+                    <Button state={"default"} type={"text"} className={cn(header.textButton, className)} onClick={handleIsCatalog}>Каталог</Button>
+                    <Input placeholder={"Фильмы..."} type={"find"} className={cn(InputStyle.input,styles.input)}/>
+                    <Button state={"default"} type={"text"} className={cn(header.textButton)}>Новости</Button>
+                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)}>Добавить статью</Button>
+                </div>
+                {
+                    isCatalog ?
+                        <>
+                            <div className={cn(styles.menu, styles.catalog)}>
                                <Link to={"/superheros"}><Button
                                 state={"default"}
                                 type={"text"}
@@ -72,15 +91,10 @@ export const Header = ({
                               </Button>
                                 </Link>
                             </div>
-                          )}
-                <Input placeholder={"Фильмы, новинки..."} type={"find"} className={cn(InputStyle.input,header.input)}/>
-                <Button state={"default"} type={"text"} className={cn(header.textButton)}>Новости</Button>
-            </div>
-            <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>Добавить статью</Button>
-        </nav>
-        <nav className={header.nav_mob}>
-            <Menu/>
-        </nav>
-    </header>
-  );
+                        </> : null
+                }
+            </>
+          : null}
+      </>
+  )
 };

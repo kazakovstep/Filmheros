@@ -78,7 +78,7 @@
 .text .hover,
 .text:hover {
     text-decoration-color: var(--secondary-purple);
-    color: var(--primary-black) !important;
+    color: var(--primary-black);
 }
 
 .text .disabled {

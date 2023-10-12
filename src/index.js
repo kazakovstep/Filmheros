@@ -4,11 +4,12 @@ import './style/index.css';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Register_reset from "./pages/Password_reset";
-import Verify from "./pages/Verify";
-import New_password from "./pages/new_password";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Register_reset from "./pages/password/Password_reset";
+import Verify from "./pages/password/Verify";
+import New_password from "./pages/password/new_password";
+import Advert from "./pages/advert/advert";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route path={"/password_reset"} element={<Register_reset/>} />
             <Route path={"/password_reset/verify"} element={<Verify/>} />
             <Route path={"/password_reset/new_password"} element={<New_password/>} />
+            <Route path={"/advert"} element={<Advert/>} />
         </Routes>
     </BrowserRouter>
   </React.StrictMode>,

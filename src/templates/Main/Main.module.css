@@ -1,3 +1,13 @@
+@media(max-width: 900px){
+  .main{
+    width:90%!important;
+    margin: 9rem auto 0 auto;
+  }
+  .advert{
+    width: 90%!important;
+  }
+}
+
 .main{
   width:70%;
     margin: 9rem auto 0 auto;
@@ -8,4 +18,10 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+}
+.advert{
+  width:40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }

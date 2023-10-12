@@ -9,27 +9,15 @@
     position: relative;
     width: 100%;
 }
+
 .eyeIcon{
     position: absolute;
+    top: 50%;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
 }
-.searchIcon{
-    position: absolute;
-    left: 1rem;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
 
-.search {
-  padding-left: 3rem!important;
-    border-radius: 0.5rem!important;
-}
-.inputContainer{
-    display: flex;
-    align-items: flex-end
-}
 .clipIcon{
     position: absolute;
     top: 50%;
@@ -48,6 +36,7 @@
 
 .input {
     font-family: 'Manrope', sans-serif!important;
+    resize: none;
     outline: none;
     display: flex;
     margin: 0;
@@ -59,6 +48,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     width: 100%;
+    overflow: hidden;
 }
 
 .p {

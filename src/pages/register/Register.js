@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import styles from "../style/register.module.css";
+import styles from "../../style/register.module.css";
 import cn from "classnames";
-import { H } from "../components/Htag/Htag";
-import Htag from "../components/Htag/Htag.module.css";
-import { Input } from "../components/Input/Input";
-import button from "../components/Button/Button.module.css";
-import { Button } from "../components/Button/Button";
-import { withAuthLayout } from "../Layout/AuthLayout/AuthLayout";
-import {Logo} from "../components/Logo/Logo";
+import { H } from "../../components/Htag/Htag";
+import Htag from "../../components/Htag/Htag.module.css";
+import { Input } from "../../components/Input/Input";
+import button from "../../components/Button/Button.module.css";
+import { Button } from "../../components/Button/Button";
+import { withAuthLayout } from "../../Layout/AuthLayout/AuthLayout";
+import {Logo} from "../../components/Logo/Logo";
 import {Link} from "react-router-dom";
 
 function RegisterIndex(): JSX.Element {

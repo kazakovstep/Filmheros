@@ -34,7 +34,6 @@ export const Footer = ({
               </address>
           </section>
       </ul>
-        <section>
             <ul className={cn(footer.v_ul, footer.r_ul)}>
                 <ul className={cn(footer.h_ul)}>
                   <img src={Chat} alt={"chat"}/>
@@ -48,7 +47,6 @@ export const Footer = ({
                   Политика конфиденциальности
                 </H>
               </ul>
-        </section>
     </footer>
   );
 };

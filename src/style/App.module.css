@@ -1,3 +1,45 @@
+@media(max-width: 900px){
+    .popular_categories{
+        flex-direction: column;
+        gap:2rem;
+    }
+    .image_container{
+        width: 100% !important;
+    }
+    .quote{
+        flex-direction: column;
+        height: auto!important;
+    }
+
+    .quote > img {
+        width: 100% !important;
+    }
+    .aside{
+        margin-top: 1rem;
+        width: 100% !important;
+        border-left: none!important;
+        border-top: 3px solid var(--primary-black);
+        padding: 5% 5%;
+        text-align: center;
+    }
+    .circle_img {
+        margin: 0 auto!important;
+      width: 150px!important;
+      height: 150px!important;
+    }
+    .list{
+        flex-direction: column;
+        gap:2rem;
+    }
+    .sub{
+        opacity: 1!important;
+        height: 5rem;
+        position: absolute;
+        width: 100%;
+        bottom:0;
+    }
+}
+
 span{
     color: var(--secondary-purple)!important;
 }

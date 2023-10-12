@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import { withAuthLayout } from "../Layout/AuthLayout/AuthLayout";
-import styles from "../style/password_reset.module.css";
+import { withAuthLayout } from "../../Layout/AuthLayout/AuthLayout";
+import styles from "../../style/password_reset.module.css";
 import cn from "classnames";
-import { H } from "../components/Htag/Htag";
-import Htag from "../components/Htag/Htag.module.css";
-import { Input } from "../components/Input/Input";
-import button from "../components/Button/Button.module.css";
-import { Button } from "../components/Button/Button";
-import {Logo} from "../components/Logo/Logo";
+import { H } from "../../components/Htag/Htag";
+import Htag from "../../components/Htag/Htag.module.css";
+import { Input } from "../../components/Input/Input";
+import button from "../../components/Button/Button.module.css";
+import { Button } from "../../components/Button/Button";
+import {Logo} from "../../components/Logo/Logo";
 import {Link} from "react-router-dom";
 
 function NewPassword(): JSX.Element {
