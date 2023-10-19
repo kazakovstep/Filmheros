@@ -143,38 +143,110 @@ span{
       overflow: hidden;
     }
 
-    .video_container iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.video_container iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    .video_container::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
+.video_container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 
-    .video_container:hover::before {
-      opacity: 1;
-    }
+.video_container:hover::before {
+    opacity: 1;
+}
 
-    .text {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.6);
-      color: var(--accent-bright-yellow);
-      text-align: center;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-    }
+.text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--accent-bright-yellow);
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
 
-    .video_container:hover .text {
-      transform: translateY(0);
+.video_container:hover .text {
+    transform: translateY(0);
+}
+
+.feedback{
+    margin-top: 2rem;
+    justify-content: space-between;
+    display: flex;
+}
+@keyframes bg-color {
+    from{
+        background-color: #d06002;
+        background-image:
+            radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
     }
+    to{
+        background-color: #054575;
+        background-image:
+            radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
+    }
+}
+@keyframes bg-color-reverse {
+    from{
+        background-color: #054575;
+        background-image:
+            radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
+    }
+    to{
+        background-color: #d06002;
+        background-image:
+            radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
+    }
+}
+.bg {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height:20rem;
+    border-radius: 1rem;
+    background-color: #d06002;
+        background-image:
+            radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
+}
+.bg:hover{
+    animation-name: bg-color;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    cursor: not-allowed;
+
+}
+.bg:not(:hover){
+    animation-name: bg-color-reverse;
+    animation-duration: 1s;
+}
+
+.name{
+    text-align: center;
+}
+
+.card {
+    padding: 0.5rem;
+    width:85%;
+    margin: 0 auto;
+    color:var(--primary-white);
+    backdrop-filter: blur(10px) saturate(200%);
+    -webkit-backdrop-filter: blur(10px) saturate(200%);
+    background-color: rgba(17, 25, 40, 0.32);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}

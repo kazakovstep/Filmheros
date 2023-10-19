@@ -120,12 +120,32 @@ export const App = () => {
             </List>
           </div>
         </section>
-      <div className={styles.video_container}>
-        <iframe src="https://www.youtube.com/embed/-tZc_1O4Lho"/>
-        <div className={styles.text}>
-          Это крутая анимация
+        <div className={cn(styles.center_block)}>
+            <H type={"h2"}>Отзывы</H>
+          </div>
+        <div className={styles.feedback}>
+            <div className={styles.bg}>
+                <div className={styles.card}>
+                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Степан</H>
+                    <br/>
+                     <H type={"h3"}><q>Сайт просто пушечный, каждый вечер захожу почитать про кино, рекомендую</q></H>
+                </div>
+            </div>
+            <div className={styles.bg}>
+                <div className={styles.card}>
+                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Николай</H>
+                    <br/>
+                     <H type={"h3"}><q>Лучший форум про киногероев, который я посещал. Затянуло с головой!!! 10/10</q></H>
+                </div>
+            </div>
+            <div className={styles.bg}>
+                <div className={styles.card}>
+                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Георгий</H>
+                    <br/>
+                     <H type={"h3"}><q>Искал информацию про героя и нигде кроме данного сайта не мог найти</q></H>
+                </div>
+            </div>
         </div>
-      </div>
     </>
   );
 }

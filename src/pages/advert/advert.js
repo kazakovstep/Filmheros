@@ -80,7 +80,7 @@ export const Advert = () => {
    useEffect(() => {
     if (
       heroName !== "" && heroDesc !== "" && actorName!=="" && filmYear!=="" && filmName!=="" &&
-        categoriesValid && tagsValid && !heroPicEmpty && !actorPicEmpty && !FormEmpty
+        categoriesValid && tagsValid && (!heroPicEmpty || heroPictures) && (!actorPicEmpty || actorPicture) && !FormEmpty
     ) {
       sessionStorage.setItem("advert", JSON.stringify(advert));
     }
@@ -145,11 +145,19 @@ export const Advert = () => {
     }, [selectedTags, selectedCategories])
 
     const handleNext = () => {
-        alert(actorPicture);
+    const heroName = document.querySelector('input[placeholder="Имя киногероя"]')?.value;
+    const heroDesc = document.querySelector('textarea[placeholder="Краткое описание персонажа"]')?.value;
+    const actorName = document.querySelector('input[placeholder="Имя актера/актрисы"]')?.value;
+    const filmYear = document.querySelector('input[placeholder="Год выхода фильма"]')?.value;
+    const filmName = document.querySelector('textarea[placeholder="Название фильма"]')?.value;
 
-        const filmYear = document.querySelector('input[placeholder="Год выхода фильма"]')?.value;
-        setFilmYear(filmYear);
-    if (heroName === "") {    
+    setHeroName(heroName);
+    setHeroDesc(heroDesc);
+    setActorName(actorName);
+    setFilmYear(filmYear);
+    setFilmName(filmName);
+
+    if (heroName === "") {
         setHeroNameState("error-filled");
     } else {
         setHeroNameState("default");
@@ -177,6 +185,7 @@ export const Advert = () => {
 
     const heroPics = document.querySelectorAll('input[type="file"]')[0];
     const actorPic = document.querySelectorAll('input[type="file"]')[1];
+
     const heroFiles = Array.from(heroPics?.files || []);
     const actorFile = actorPic?.files?.[0];
 
@@ -186,7 +195,7 @@ export const Advert = () => {
         setHeroPicEmpty(false);
     }
 
-    if (!actorFile && !actorPicture) {
+    if (!actorFile) {
         setActorPicEmpty(true);
     } else {
         setActorPicEmpty(false);
@@ -238,44 +247,49 @@ export const Advert = () => {
     if (!isFilled) {
         setFormEmpty(true);
     }
-    if (actorFile) {
-            const logoReader = new FileReader();
-            logoReader.readAsDataURL(actorFile);
-            logoReader.onloadend = () => {
-                const actorPic = logoReader.result;
-
-                const HerosFilesPromises = heroFiles.map((file) => {
-                    return new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.readAsDataURL(file);
-                        reader.onloadend = () => {
-                            const base64 = reader.result;
-                            resolve(base64);
-                        };
-                        reader.onerror = reject;
-                    });
-                });
-
-                Promise.all(HerosFilesPromises).then((results) => {
-                    const heroPics: string[] = results;
-
-                    setAdvert({
-                            heroName,
-                            heroDesc,
-                            actorName,
-                            filmYear,
-                            filmName,
-                            selectedTags,
-                            selectedCategories,
-                            heroPics,
-                            actorPic,
-                            facts,
-                            importantFact
-                        })
-                });
-            };
+    const logoReader = new FileReader();
+    logoReader.readAsDataURL(actorFile ? actorFile : new Blob());
+    logoReader.onloadend = () => {
+        let actorPic = logoReader.result;
+        if(actorPic === "data:application/octet-stream;base64,"){
+            actorPic = actorPicture;
+            setActorPicEmpty(false)
         }
-    }
+        const heroFilesPromises = heroFiles.map((file) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    const base64 = reader.result;
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+            });
+        });
+        Promise.all(heroFilesPromises).then((results) => {
+            let heroPics = results;
+            if(heroPics.length===0){
+                heroPics = heroPictures;
+                setHeroPicEmpty(false);
+            }
+            setAdvert({
+                    heroName,
+                    heroDesc,
+                    actorName,
+                    filmYear,
+                    filmName,
+                    selectedTags,
+                    selectedCategories,
+                    actorPic,
+                    heroPics,
+                    facts,
+                    importantFact,
+                });
+        });
+
+    };
+}
+
 
   return (
     <>
@@ -295,7 +309,6 @@ export const Advert = () => {
                   hint={"Например, Халк"}
                   label={"Имя киногероя"}
                   value={AdvertStorage.heroName}
-                  onChange={(el) => setHeroName(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
@@ -306,7 +319,6 @@ export const Advert = () => {
                   hint={"Например, Халк представляет собой альтер-эго Брюса Бэннера, который стал высокоэнергетическим громадином после неудачного эксперимента с гамма-радиацией...."}
                   label={"Описание"}
                   value={AdvertStorage.heroDesc}
-                  onChange={(el) => setHeroDesc(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
@@ -338,14 +350,13 @@ export const Advert = () => {
                   hint={"Например, Том Круз"}
                   label={"Имя актера/актрисы"}
                   value={AdvertStorage.actorName}
-                  onChange={(el) => setActorName(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>Как выглядит актер/актриса?</H>
                 <H type={"caption"}>Выберите 1 изображение</H>
                 <File many={false} valueSolo={actorPicture}/>
-                {actorPicture ? null : <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо выбрать изображение</p>}
+                {actorPicEmpty ? <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо выбрать изображение</p> : null}
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>О каком фильме вы хотите рассказать?</H>
@@ -383,7 +394,6 @@ export const Advert = () => {
                       hint={"Например, Мстители"}
                       label={"Название фильма"}
                       value={AdvertStorage.filmName}
-                      onChange={(el) => setFilmName(el.target.value)}
                     />
                 </div>
             </div>

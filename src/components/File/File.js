@@ -17,6 +17,17 @@ useEffect(() => {
   }
 }, [valueSolo]);
 
+useEffect(() => {
+  if (valueMany && valueMany.length!==0) {
+    setSelectedFiles(valueMany.map((file) => ({
+      imageSrc: file,
+      name: file
+    })));
+  } else {
+    setSelectedFiles([]);
+  }
+}, [valueMany]);
+
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -24,11 +35,10 @@ useEffect(() => {
     if (many) {
       if (files && files.length <= 3) {
         const fileArray = Array.from(files).map((file) => ({
-          ...file,
           imageSrc: URL.createObjectURL(file),
           name: file.name,
         }));
-        setSelectedFiles((prevFiles) => [...prevFiles, ...fileArray]);
+        setSelectedFiles([...fileArray]);
       }
     } else {
       if (files && files.length === 1) {
@@ -43,10 +53,24 @@ useEffect(() => {
     }
   };
 
-  const handleRemoveFile = (file) => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((f) => f !== file));
-    URL.revokeObjectURL(file.imageSrc);
-  };
+
+
+const handleRemoveFile = (file) => {
+  setSelectedFiles(prevFiles => prevFiles.filter(f => f !== file));
+  setSelectedFilesSolo(prevFiles => prevFiles.filter(f => f !== file));
+
+  URL.revokeObjectURL(file.imageSrc);
+
+  const inputFiles = inputRef.current?.files;
+
+  if (inputFiles) {
+    const updatedFiles = Array.from(inputFiles).filter(f => f.name !== file.name);
+    const newInputFiles = new DataTransfer();
+
+    updatedFiles.forEach(f => newInputFiles.items.add(f));
+    inputRef.current.files = newInputFiles.files;
+  }
+};
 
     return (
       <div>
@@ -55,7 +79,7 @@ useEffect(() => {
           type="file"
           onChange={handleFileChange}
           {...props}
-          style={{ display: "none" }}
+
           accept="image/*"
           ref={inputRef}
           multiple={many}
@@ -84,7 +108,7 @@ useEffect(() => {
         {(selectedFiles.length > 0 || selectedFilesSolo.length > 0) && (
           <div className={cn(styles.imageBlock)}>
             {many ?
-                (selectedFiles.map((file, index) => (
+                (inputRef.current.value ? (selectedFiles.map((file, index) => (
               <div key={file.name + index} className={cn(styles.imageWrapper)}>
                 <div className={cn(styles.imageContainer)}>
                   <img className={cn(styles.image)} src={file.imageSrc} alt={file.name} />
@@ -97,7 +121,15 @@ useEffect(() => {
                   onClick={() => handleRemoveFile(file)}
                 />
               </div>
-            ))) :
+            ))) : (selectedFiles.map((file, index) => (
+              <div key={file.name + index} className={cn(styles.imageWrapper)}>
+                <div className={cn(styles.imageContainer)}>
+                  <img className={cn(styles.image)} src={file.imageSrc} alt={file.name} />
+                </div>
+                <input className={cn(styles.file_name)} readOnly value={file.name} />
+              </div>
+            ))))
+                 :
                 (selectedFilesSolo.map((file, index) => (
               <div key={file.name + index} className={cn(styles.imageWrapper)}>
                 <div className={cn(styles.imageContainer)}>

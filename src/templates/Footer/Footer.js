@@ -5,7 +5,9 @@ import Htag from "../../components/Htag/Htag.module.css";
 import Chat from "../../images/chat.svg";
 import Vk from "../../images/vk.svg"
 import Tg from "../../images/tg.svg"
+import Tn from "../../images/tenchat.svg"
 import {Logo} from "../../components/Logo/Logo";
+
 export const Footer = ({
   className,
   ...props
@@ -40,8 +42,13 @@ export const Footer = ({
                   <H type={"h3"}>Задать вопрос</H>
                 </ul>
                  <ul className={cn(footer.h_ul)}>
-                  <img src={Vk} alt={"vk"} className={cn(footer.vk_sm_icon)} />
-                  <img src={Tg} alt={"tg"} className={cn(footer.tg_sm_icon)} />
+                     <div className={footer.social}>
+                         <img src={Vk} alt={"vk"} className={cn(footer.vk_sm_icon)} />
+                         <div className={footer.bg}></div>
+                     </div>
+
+                     <img src={Tg} alt={"tg"} className={cn(footer.tg_sm_icon)} />
+                     <img src={Tn} alt={"tn"} className={cn(footer.tn_sm_icon)} />
                 </ul>
                 <H type={"body"} className={cn(footer.pc, Htag.body)}>
                   Политика конфиденциальности
