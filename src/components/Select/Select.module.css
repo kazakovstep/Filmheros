@@ -18,7 +18,6 @@
     padding: 0.25rem 1.25rem;
     gap: 0.625rem;
     line-height: 1.25rem;
-    /*margin-right: 75% !important;*/
 }
 
 .option .first {
@@ -135,16 +134,19 @@
     margin: auto;
     opacity: 0;
     max-height: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     transition: opacity 0.3s ease, max-height 0.3s ease;
     z-index: 999;
     background: var(--primary-white);
     border: solid 1px var(--primary-middle-grey);
 }
+.optionsList::-webkit-scrollbar{
+    display: none;
+}
 
 .optionsListVisible {
     opacity: 1;
-    max-height: 20rem; /* Adjust the max-height value as needed */
+    max-height: 20rem;
 }
 
 .arrowIcon {
@@ -155,8 +157,6 @@
 .arrowIcon_open {
     transform: translateY(-50%) rotate(180deg);
 }
-
-/* Add the following styles */
 
 .selectWrapper:focus-within .arrowIcon {
     transform: translateY(-50%) rotate(180deg);

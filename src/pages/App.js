@@ -120,6 +120,12 @@ export const App = () => {
             </List>
           </div>
         </section>
+      <div className={styles.video_container}>
+        <iframe src="https://www.youtube.com/embed/-tZc_1O4Lho"/>
+        <div className={styles.text}>
+          Это крутая анимация
+        </div>
+      </div>
     </>
   );
 }

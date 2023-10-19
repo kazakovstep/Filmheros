@@ -9,6 +9,7 @@ export const Select = ({state = "default",
                         children,
                         placeholder,
                         searchPlaceholder,
+    onChange,
                         value,
                            ...props
                        }) => {
@@ -32,7 +33,7 @@ export const Select = ({state = "default",
         setSelectedValue(value);
         setIsOptionsVisible(false);
         if (props.onChange) {
-            props.onChange(value); // Add this line
+            props.onChange(value);
         }
     };
 
@@ -123,7 +124,6 @@ export const Select = ({state = "default",
                         [styles.p_error_filled]: state === "error-filled",
                         [styles.p_disabled_empty]: isDisabledEmpty,
                         [styles.p_disabled_filled]: isDisabledFilled,
-                        [styles.p_black]: selectedValue !== "",
                     })}
                 >
                     {hint}

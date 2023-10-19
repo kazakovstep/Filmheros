@@ -12,6 +12,7 @@ import {Textarea} from "../../components/Textarea/Textarea";
 import {Badge} from "../../components/Badge/Badge";
 import {Checkbox} from "../../components/Checkbox/Checkbox";
 import {Button} from "../../components/Button/Button";
+import PStyle from "../../components/Input/Input.module.css"
 
 const tags = [
   "Мужчина",
@@ -33,18 +34,80 @@ interface AdditionalForm {
   desc:string;
 }
 export const Advert = () => {
+////////////////////////состояния//////////////////////////////
+    const [heroNameState, setHeroNameState] = useState("default");
+    const [heroDescState, setHeroDescState] = useState("default");
+    const [actorNameState, setActorNameState] = useState("default");
+    const [filmNameState, setFilmNameState] = useState("default");
+    const [filmYearState, setFilmYearState] = useState("default");
 
-  const [selectedTags, setSelectedTags] = useState([]);
+    const [tagsValid, setTagsValid] = useState(false);
+    const [categoriesValid, setCategoriesValid] = useState(false);
+
+    const [heroPicEmpty, setHeroPicEmpty] = useState(false);
+    const [actorPicEmpty, setActorPicEmpty] = useState(false);
+
+    const [selectedTags, setSelectedTags] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
 
+    const [actorPicture, setActorPicture] = useState("");
+    const [heroPictures, setHeroPictures] = useState([]);
 
-    const [additionalForms, setAdditionalForms] = useState([]);
+    const [FormEmpty, setFormEmpty] = useState(false);
+
+  const [additionalForms, setAdditionalForms] = useState([]);
+////////////////////////контент страницы//////////////////////////////
+    const [heroName, setHeroName] = useState("");
+    const [heroDesc, setHeroDesc] = useState("");
+    const [actorName, setActorName] = useState("");
+    const [filmYear, setFilmYear] = useState("");
+    const [filmName, setFilmName] = useState("");
+    
+   const [advert, setAdvert] = useState({
+       heroName: "",
+       heroDesc: "",
+       actorName: "",
+       filmYear: "",
+       filmName: "",
+       selectedCategories: "",
+       selectedTags: "",
+       heroPics: [],
+       actorPic: "",
+       facts: [],
+       importantFact: []
+    });
+
+   useEffect(() => {
+    if (
+      heroName !== "" && heroDesc !== "" && actorName!=="" && filmYear!=="" && filmName!=="" &&
+        categoriesValid && tagsValid && !heroPicEmpty && !actorPicEmpty && !FormEmpty
+    ) {
+      sessionStorage.setItem("advert", JSON.stringify(advert));
+    }
+  }, [heroName, heroDesc, actorName, filmYear, filmName, advert, categoriesValid, tagsValid, heroPicEmpty, actorPicEmpty, FormEmpty]);
+
+   const [AdvertStorage, setAdvertStorage] = useState(advert);
+   useEffect(() => {
+      const storedAdvert = sessionStorage.getItem("advert");
+        if (storedAdvert) {
+          setAdvertStorage(JSON.parse(storedAdvert));
+        }
+   }, [advert])
+    useEffect(() => {
+    const choosenTags = AdvertStorage.selectedTags;
+    const choosenCategories = AdvertStorage.selectedCategories;
+    const actorpic = AdvertStorage.actorPic;
+    const heropics = AdvertStorage.heroPics;
+    setHeroPictures(heropics);
+    setActorPicture(actorpic);
+    setSelectedTags(choosenTags);
+    setSelectedCategories(choosenCategories);
+  }, [AdvertStorage]);
 
     const handleAddLink = () => {
-    const newFormId = additionalForms.length + 1;
     setAdditionalForms((prevForms: AdditionalForm[]) => [
       ...prevForms,
-      { type: "", contact: "", state: "default"}
+      { fact: "", desc: "", state: "default"}
     ]);
   };
 
@@ -52,7 +115,7 @@ export const Advert = () => {
     if (selectedTags.includes(value)) {
       setSelectedTags(selectedTags.filter((item) => item !== value));
     } else {
-      if (selectedTags.length < 2) {
+      if (selectedTags.length < 1) {
         setSelectedTags([...selectedTags, value]);
       }
     }
@@ -62,12 +125,157 @@ export const Advert = () => {
     if (selectedCategories.includes(value)) {
       setSelectedCategories(selectedCategories.filter((item) => item !== value));
     } else {
-      if (selectedCategories.length < 2) {
+      if (selectedCategories.length < 1) {
         setSelectedCategories([...selectedCategories, value]);
       }
     }
   };
 
+    useEffect(() => {
+        if(selectedTags.length === 0){
+            setTagsValid(false);
+        } else {
+            setTagsValid(true);
+        }
+        if(selectedCategories.length === 0){
+            setCategoriesValid(false);
+        } else {
+            setCategoriesValid(true);
+        }
+    }, [selectedTags, selectedCategories])
+
+    const handleNext = () => {
+        alert(actorPicture);
+
+        const filmYear = document.querySelector('input[placeholder="Год выхода фильма"]')?.value;
+        setFilmYear(filmYear);
+    if (heroName === "") {    
+        setHeroNameState("error-filled");
+    } else {
+        setHeroNameState("default");
+    }
+    if (heroDesc === "") {
+        setHeroDescState("error-filled");
+    } else {
+        setHeroDescState("default");
+    }
+    if (actorName === "") {
+        setActorNameState("error-filled");
+    } else {
+        setActorNameState("default");
+    }
+    if (filmYear === "") {
+        setFilmYearState("error-filled");
+    } else {
+        setFilmYearState("default");
+    }
+    if (filmName === "") {
+        setFilmNameState("error-filled");
+    } else {
+        setFilmNameState("default");
+    }
+
+    const heroPics = document.querySelectorAll('input[type="file"]')[0];
+    const actorPic = document.querySelectorAll('input[type="file"]')[1];
+    const heroFiles = Array.from(heroPics?.files || []);
+    const actorFile = actorPic?.files?.[0];
+
+    if (heroFiles.length === 0) {
+        setHeroPicEmpty(true);
+    } else {
+        setHeroPicEmpty(false);
+    }
+
+    if (!actorFile && !actorPicture) {
+        setActorPicEmpty(true);
+    } else {
+        setActorPicEmpty(false);
+    }
+
+    const factInputs = document.querySelectorAll('input');
+    let fact = "";
+    let desc = "";
+    let isFilled = false;
+
+    const facts: {
+        fact: string;
+        desc: string;
+    }[] = [];
+
+    const importantFact: {
+        fact: string;
+        desc: string;
+    }[] = [];
+
+    factInputs.forEach((input, index) => {
+        if (input.placeholder === "Факт") {
+            const important = factInputs[index - 1];
+            const factInput = factInputs[index];
+            const descInput = factInputs[index + 1];
+
+            if (factInput && descInput && factInput.value !== "" && descInput.value !== "") {
+                if (important.checked) {
+                    fact = factInput.value;
+                    desc = descInput.value;
+                    importantFact.push({ fact, desc });
+                    fact = "";
+                    desc = "";
+                    setFormEmpty(false);
+                    isFilled = true;
+                } else {
+                    fact = factInput.value;
+                    desc = descInput.value;
+                    facts.push({ fact, desc });
+                    fact = "";
+                    desc = "";
+                    setFormEmpty(false);
+                    isFilled = true;
+                }
+            }
+        }
+    });
+
+    if (!isFilled) {
+        setFormEmpty(true);
+    }
+    if (actorFile) {
+            const logoReader = new FileReader();
+            logoReader.readAsDataURL(actorFile);
+            logoReader.onloadend = () => {
+                const actorPic = logoReader.result;
+
+                const HerosFilesPromises = heroFiles.map((file) => {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onloadend = () => {
+                            const base64 = reader.result;
+                            resolve(base64);
+                        };
+                        reader.onerror = reject;
+                    });
+                });
+
+                Promise.all(HerosFilesPromises).then((results) => {
+                    const heroPics: string[] = results;
+
+                    setAdvert({
+                            heroName,
+                            heroDesc,
+                            actorName,
+                            filmYear,
+                            filmName,
+                            selectedTags,
+                            selectedCategories,
+                            heroPics,
+                            actorPic,
+                            facts,
+                            importantFact
+                        })
+                });
+            };
+        }
+    }
 
   return (
     <>
@@ -81,20 +289,24 @@ export const Advert = () => {
             </H>
             <div className={styles.input_container}>
                <Input
-                  state={"default"}
+                  state={heroNameState}
                   type={"text"}
                   placeholder={"Имя киногероя"}
                   hint={"Например, Халк"}
                   label={"Имя киногероя"}
+                  value={AdvertStorage.heroName}
+                  onChange={(el) => setHeroName(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
-               <Input
-                  state={"default"}
+               <Textarea
+                  state={heroDescState}
                   type={"text"}
                   placeholder={"Краткое описание персонажа"}
                   hint={"Например, Халк представляет собой альтер-эго Брюса Бэннера, который стал высокоэнергетическим громадином после неудачного эксперимента с гамма-радиацией...."}
                   label={"Описание"}
+                  value={AdvertStorage.heroDesc}
+                  onChange={(el) => setHeroDesc(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
@@ -109,31 +321,36 @@ export const Advert = () => {
                                       </Badge>
                                     ))}
                 </div>
+                {tagsValid ? null : <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо сделать выбор</p>}
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>Как выглядит персонаж?</H>
-                <H type={"caption"}>Выберите не более 5 изображений</H>
-                <File many={true}/>
+                <H type={"caption"}>Выберите не более 3 изображений</H>
+                <File many={true} valueMany={heroPictures}/>
+                {heroPicEmpty ? <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо выбрать изображение</p> : null}
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>Кто играл/озвучивал персонажа?</H>
                 <Input
-                  state={"default"}
+                  state={actorNameState}
                   type={"text"}
                   placeholder={"Имя актера/актрисы"}
                   hint={"Например, Том Круз"}
                   label={"Имя актера/актрисы"}
+                  value={AdvertStorage.actorName}
+                  onChange={(el) => setActorName(el.target.value)}
                 />
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>Как выглядит актер/актриса?</H>
                 <H type={"caption"}>Выберите 1 изображение</H>
-                <File many={false}/>
+                <File many={false} valueSolo={actorPicture}/>
+                {actorPicture ? null : <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо выбрать изображение</p>}
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>О каком фильме вы хотите рассказать?</H>
                 <div className={styles.film_form}>
-                    <Select state={"default"} placeholder={"Год выхода фильма"} hint={"Год выхода фильма"} className={styles.select}>
+                    <Select state={filmYearState} placeholder={"Год выхода фильма"} hint={"Год выхода фильма"} className={styles.select} value={AdvertStorage.filmYear}>
                         <option value={"2023"}>2023</option>
                         <option value={"2022"}>2022</option>
                         <option value={"2021"}>2021</option>
@@ -160,11 +377,13 @@ export const Advert = () => {
                         <option value={"2000"}>2000</option>
                       </Select>
                     <Textarea
-                      state={"default"}
+                      state={filmNameState}
                       type={"text"}
                       placeholder={"Название фильма"}
                       hint={"Например, Мстители"}
                       label={"Название фильма"}
+                      value={AdvertStorage.filmName}
+                      onChange={(el) => setFilmName(el.target.value)}
                     />
                 </div>
             </div>
@@ -180,6 +399,7 @@ export const Advert = () => {
                                       </Badge>
                                     ))}
                 </div>
+                {categoriesValid ? null : <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо сделать выбор</p>}
             </div>
             <div className={styles.input_container}>
                 <H type={"body-bold"}>Интересные факты</H>
@@ -192,29 +412,14 @@ export const Advert = () => {
                       placeholder={"Факт"}
                       label={"Факт"}
                     />
-                    <Textarea
-                      state={"default"}
-                      type={"text"}
-                      placeholder={"Суть факта"}
-                      label={"Суть факта"}
-                    />
-                </div>
-                <div className={styles.checkbox_form}>
-                    <Checkbox form={"circle"}/>
                     <Input
                       state={"default"}
                       type={"text"}
-                      placeholder={"Факт"}
-                      label={"Факт"}
-                    />
-                    <Textarea
-                      state={"default"}
-                      type={"text"}
                       placeholder={"Суть факта"}
                       label={"Суть факта"}
                     />
                 </div>
-                {additionalForms.map((form, index) => (
+                {additionalForms.map(() => (
           <div className={styles.checkbox_form}>
                     <Checkbox form={"circle"}/>
                     <Input
@@ -223,7 +428,7 @@ export const Advert = () => {
                       placeholder={"Факт"}
                       label={"Факт"}
                     />
-                    <Textarea
+                    <Input
                       state={"default"}
                       type={"text"}
                       placeholder={"Суть факта"}
@@ -231,14 +436,14 @@ export const Advert = () => {
                     />
                 </div>
         ))}
+                {FormEmpty ? <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо написать/выбрать хотя бы один факт</p> : null}
                 <div className={styles.addbutton}>
                     <Button type={"text"} state={"default"} onClick={handleAddLink}>Добавить факт</Button>
                 </div>
             </div>
             <div className={styles.pubbutton}>
-                <Button state={"default"} type={"primary"}>Опубликовать</Button>
+                <Button state={"default"} type={"primary"} onClick={handleNext}>Опубликовать</Button>
             </div>
-
         </div>
     </>
   );

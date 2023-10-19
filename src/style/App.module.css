@@ -132,3 +132,49 @@ span{
 .companyName{
     margin-top: 1rem;
 }
+
+
+
+
+.video_container {
+      position: relative;
+      width: 50%;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .video_container iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video_container::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .video_container:hover::before {
+      opacity: 1;
+    }
+
+    .text {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: var(--accent-bright-yellow);
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .video_container:hover .text {
+      transform: translateY(0);
+    }

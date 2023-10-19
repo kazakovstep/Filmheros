@@ -2,6 +2,7 @@ import {Footer} from "../../templates/Footer/Footer";
 import React from 'react';
 import { Main } from "../../templates/Main/Main";
 import {Header} from "../../templates/Header/Header";
+import {Bell} from "../../components/Bell/Bell";
 const MainPage = ({ children }) => {
   return (
     <>
@@ -9,6 +10,7 @@ const MainPage = ({ children }) => {
       <Main type={"main"}>
         <div>{children}</div>
       </Main>
+        <Bell/>
       <Footer/>
     </>
   );

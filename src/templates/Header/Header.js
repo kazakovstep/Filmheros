@@ -76,7 +76,9 @@ export const Header = ({
                 <Input placeholder={"Фильмы, новинки..."} type={"find"} className={cn(InputStyle.input,header.input)}/>
                 <Button state={"default"} type={"text"} className={cn(header.textButton)}>Новости</Button>
             </div>
-            <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>Добавить статью</Button>
+            <Link to={"/advert"} className={header.link}>
+                <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>Добавить статью</Button>
+            </Link>
         </nav>
         <nav className={header.nav_mob}>
             <Menu/>
