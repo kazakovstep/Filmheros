@@ -68,6 +68,7 @@
   align-self: flex-end;
   padding-inline-start: 0;
   gap: 1rem;
+  position: relative;
 }
 
 .h_ul svg {
@@ -92,37 +93,40 @@
   margin-top: 5rem;
 }
 
-.vk_sm_icon, .tg_sm_icon, .tn_sm_icon{
+.img{
   border-radius: 50%;
   padding: 0.2rem;
-  z-index: 500;
+  overflow: hidden;
+  position: relative;
 }
-@keyframes bg-animation {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
+.img:hover::before{
+  top:0!important;
+  visibility: visible;
 }
-.social{
-  display: flex;
-  flex-direction: column-reverse;
+.img:before{
+  visibility: hidden;
+  transition: 300ms;
+  content: '';
+  left:0;
+  top:-80%;
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  z-index: 0;
+  background-color: #d06002;
+  background-image:
+          radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
+          radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
 }
 .bg{
-  border-radius: 50%;
-  z-index: -10000;
-  transform: translateY(-100%);
-  position: absolute;
-  width:54.4px;
-  height: 54.4px;
-  background-color: #d06002;
-    background-image: radial-gradient(at 47% 33%, hsl(55.36, 94%, 54%) 0, transparent 59%),
-                      radial-gradient(at 82% 65%, hsl(79.71, 91%, 55.00000000000001%) 0, transparent 55%);
+  z-index: 0;
+  overflow: hidden;
 }
-.vk_sm_icon:hover + .bg, .tg_sm_icon:hover .bg, .tn_sm_icon:hover .bg{
+.vk_sm_icon, .tg_sm_icon, .tn_sm_icon{
+  position: relative;
+  z-index: 1;
+}
+.vk_sm_icon:hover, .tg_sm_icon:hover, .tn_sm_icon:hover{
   cursor: pointer;
-  animation-name: bg-animation;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
 }

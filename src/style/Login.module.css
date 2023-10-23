@@ -28,6 +28,7 @@
     justify-content: center;
 }
 .form {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,4 +68,57 @@
 
 .list_text {
     color: var(--primary-black);
+}
+
+
+.square {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--primary-dark-grey);
+  opacity: 0.2;
+  pointer-events: none;
+  border-radius: 10%;
+  backdrop-filter: blur(10px);
+  animation: moveSquare 2s linear infinite;
+}
+.square1 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--primary-dark-grey);
+  opacity: 0.2;
+  border-radius: 10%;
+  animation: moveSquare1 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes moveSquare {
+    0%, 100%{
+        margin-top:0;
+    }
+    25%{
+        margin-top: 25px;
+    }
+    50%{
+        margin-top:50px;
+    }
+    75%{
+        margin-bottom: 25px;
+    }
+}
+
+@keyframes moveSquare1 {
+    0%, 100%{
+        margin-bottom:0;
+    }
+    25%{
+        margin-bottom: 35px;
+    }
+    50%{
+        margin-bottom:60px;
+    }
+    75%{
+        margin-top: 35px;
+    }
 }

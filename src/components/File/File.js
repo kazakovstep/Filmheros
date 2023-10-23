@@ -79,7 +79,7 @@ const handleRemoveFile = (file) => {
           type="file"
           onChange={handleFileChange}
           {...props}
-
+          style={{display:"none"}}
           accept="image/*"
           ref={inputRef}
           multiple={many}

@@ -42,13 +42,21 @@ export const Footer = ({
                   <H type={"h3"}>Задать вопрос</H>
                 </ul>
                  <ul className={cn(footer.h_ul)}>
-                     <div className={footer.social}>
-                         <img src={Vk} alt={"vk"} className={cn(footer.vk_sm_icon)} />
-                         <div className={footer.bg}></div>
+                     <div className={footer.img}>
+                         <div className={footer.bg}>
+                             <img src={Vk} alt={"vk"} className={cn(footer.vk_sm_icon)} />
+                         </div>
                      </div>
-
-                     <img src={Tg} alt={"tg"} className={cn(footer.tg_sm_icon)} />
-                     <img src={Tn} alt={"tn"} className={cn(footer.tn_sm_icon)} />
+                     <div className={footer.img}>
+                         <div className={footer.bg}>
+                              <img src={Tg} alt={"tg"} className={cn(footer.tg_sm_icon)} />
+                         </div>
+                     </div>
+                     <div className={footer.img}>
+                         <div className={footer.bg}>
+                             <img src={Tn} alt={"tn"} className={cn(footer.tn_sm_icon)} />
+                         </div>
+                     </div>
                 </ul>
                 <H type={"body"} className={cn(footer.pc, Htag.body)}>
                   Политика конфиденциальности

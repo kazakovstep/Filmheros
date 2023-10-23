@@ -1,7 +1,7 @@
 import {H} from "../components/Htag/Htag";
 import {withMainLayout} from "../Layout/MainLayout/Main";
 import cn from "classnames";
-import React from "react";
+import React, {useState} from "react";
 import styles from "../style/App.module.css";
 import Shooter from "../images/boeviki.jpg";
 import Comedy from "../images/comedy.jpg";
@@ -18,6 +18,17 @@ import Paramount from "../images/Paramount.png";
 import twentiethFox from "../images/20th Century Fox.jpg";
 import Columbia from "../images/Columbia.jpg";
 export const App = () => {
+
+    const [hoverIndex, setHoverIndex] = useState(null);
+
+  const handleHover = (index) => {
+    setHoverIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverIndex(null);
+  };
+
   return (
     <>
         <div className={cn(styles.center_block)}>
@@ -30,17 +41,44 @@ export const App = () => {
               <H type={"h2"}>Топ <span>популярных</span> категорий:</H>
           </div>
           <div className={cn(styles.popular_categories)}>
-              <Link to={"/superheros"} className={cn(styles.image_container)}>
-                <img src={Superheros} alt={"Superheros"}/>
-                <H type={"h3"} className={cn(styles.sub, HStyle.h3)}>Супергерои</H>
+              <Link
+                to="/superheros"
+                className={cn(styles.image_container, {
+                  [styles.hovered]:  hoverIndex === 2 || hoverIndex === 1,
+                })}
+                onMouseEnter={() => handleHover(0)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Superheros} alt="Superheros" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Супергерои
+                </H>
               </Link>
-              <Link to={"/shooters"} className={cn(styles.image_container)}>
-                <img src={Shooter} alt={"Shooter"}/>
-                <H type={"h3"} className={cn(styles.sub, HStyle.h3)}>Персонажи боевиков</H>
+              <Link
+                to="/shooters"
+                className={cn(styles.image_container, {
+                  [styles.hovered]:  hoverIndex === 2 || hoverIndex === 0,
+                })}
+                onMouseEnter={() => handleHover(1)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Shooter} alt="Shooter" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи боевиков
+                </H>
               </Link>
-              <Link to={"/comedy"} className={cn(styles.image_container)}>
-                <img src={Comedy} alt={"Comedy"}/>
-                <H type={"h3"} className={cn(styles.sub, HStyle.h3)}>Персонажи комедии</H>
+              <Link
+                to="/comedy"
+                className={cn(styles.image_container, {
+                  [styles.hovered]: hoverIndex === 0 || hoverIndex === 1,
+                })}
+                onMouseEnter={() => handleHover(2)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Comedy} alt="Comedy" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи комедии
+                </H>
               </Link>
           </div>
         </section>
@@ -126,22 +164,19 @@ export const App = () => {
         <div className={styles.feedback}>
             <div className={styles.bg}>
                 <div className={styles.card}>
-                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Степан</H>
-                    <br/>
+                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Степан</H>
                      <H type={"h3"}><q>Сайт просто пушечный, каждый вечер захожу почитать про кино, рекомендую</q></H>
                 </div>
             </div>
             <div className={styles.bg}>
                 <div className={styles.card}>
-                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Николай</H>
-                    <br/>
+                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Николай</H>
                      <H type={"h3"}><q>Лучший форум про киногероев, который я посещал. Затянуло с головой!!! 10/10</q></H>
                 </div>
             </div>
             <div className={styles.bg}>
                 <div className={styles.card}>
-                    <H type={"h2"} className={cn(HStyle.h2, styles.name)}>Георгий</H>
-                    <br/>
+                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Георгий</H>
                      <H type={"h3"}><q>Искал информацию про героя и нигде кроме данного сайта не мог найти</q></H>
                 </div>
             </div>
