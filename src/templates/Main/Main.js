@@ -9,6 +9,7 @@ export const Main = ({ type, ...props }) => {
                   [styles.main]: type === "main",
                   [styles.auth]: type === "auth",
                   [styles.advert]: type === "advert",
+                   [styles.account]: type === "account",
               })}
               {...props}
             ></div>

@@ -10,6 +10,7 @@ import Register_reset from "./pages/password/Password_reset";
 import Verify from "./pages/password/Verify";
 import New_password from "./pages/password/new_password";
 import Advert from "./pages/advert/advert";
+import Catalog from "./pages/catalog/Catalog";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -21,6 +22,7 @@ ReactDOM.render(
             <Route path={"/password_reset/verify"} element={<Verify/>} />
             <Route path={"/password_reset/new_password"} element={<New_password/>} />
             <Route path={"/advert"} element={<Advert/>} />
+            <Route path={"/catalog"} element={<Catalog/>} />
         </Routes>
     </BrowserRouter>
   </React.StrictMode>,

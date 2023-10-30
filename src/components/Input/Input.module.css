@@ -43,7 +43,6 @@
     padding: 0.25rem 1.25rem;
     gap: 0.625rem;
     line-height: 1.25rem;
-    /*margin-right: 75% !important;*/
 }
 
 .input {
@@ -136,20 +135,20 @@
 }
 
 .label {
-    transition: transform 0.3s, opacity 0.3s;
-    transform-origin: top left;
-    transform: translateY(-1.5em);
+    display: flex;
+    transition: height 300ms, opacity 200ms;
+    height: 0;
     opacity: 0;
 }
 
-.label_focused,
-.input_focused+.label{
-    transform: translateY(0);
+.label_focused
+{
+    display: flex;
+    height: 2rem;
     opacity: 1;
 }
 
-.input_focused,
-.input_focused+.label {
+.input_focused{
     transition: border-color 0.3s;
     border-color: blue;
 }

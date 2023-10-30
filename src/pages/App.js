@@ -17,6 +17,13 @@ import DreamWorks from "../images/Dreamworks.jpg";
 import Paramount from "../images/Paramount.png";
 import twentiethFox from "../images/20th Century Fox.jpg";
 import Columbia from "../images/Columbia.jpg";
+import Fantastic from "../images/fantastic.jpg"
+import Detective from "../images/detective.jpg"
+import Horror from "../images/horror.jpg"
+import Adventure from "../images/adventure.jpeg"
+import {Input} from "../components/Input/Input";
+import {Textarea} from "../components/Textarea/Textarea";
+import {Button} from "../components/Button/Button";
 export const App = () => {
 
     const [hoverIndex, setHoverIndex] = useState(null);
@@ -43,8 +50,8 @@ export const App = () => {
           <div className={cn(styles.popular_categories)}>
               <Link
                 to="/superheros"
-                className={cn(styles.image_container, {
-                  [styles.hovered]:  hoverIndex === 2 || hoverIndex === 1,
+                className={cn(styles.image_container, styles.superheros, {
+                  [styles.hovered]: [5, 1, 2, 3, 4, 6].includes(hoverIndex)
                 })}
                 onMouseEnter={() => handleHover(0)}
                 onMouseLeave={handleMouseLeave}
@@ -56,8 +63,8 @@ export const App = () => {
               </Link>
               <Link
                 to="/shooters"
-                className={cn(styles.image_container, {
-                  [styles.hovered]:  hoverIndex === 2 || hoverIndex === 0,
+                className={cn(styles.image_container,styles.shooters, {
+                  [styles.hovered]: [0, 5, 2, 3, 4, 6].includes(hoverIndex)
                 })}
                 onMouseEnter={() => handleHover(1)}
                 onMouseLeave={handleMouseLeave}
@@ -68,16 +75,68 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/comedy"
-                className={cn(styles.image_container, {
-                  [styles.hovered]: hoverIndex === 0 || hoverIndex === 1,
+                to="/adventure"
+                className={cn(styles.image_container, styles.adventure, {
+                  [styles.hovered]: [0, 1, 5, 3, 4, 6].includes(hoverIndex)
                 })}
                 onMouseEnter={() => handleHover(2)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Adventure} alt="Adventure" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи приключений
+                </H>
+              </Link>
+              <Link
+                to="/comedy"
+                className={cn(styles.image_container, styles.comedians, {
+                  [styles.hovered]: [0, 1, 2, 5, 4, 6].includes(hoverIndex)
+                })}
+                onMouseEnter={() => handleHover(3)}
                 onMouseLeave={handleMouseLeave}
               >
                 <img src={Comedy} alt="Comedy" />
                 <H type="h3" className={cn(styles.sub, HStyle.h3)}>
                   Персонажи комедии
+                </H>
+              </Link>
+              <Link
+                to="/horror"
+                className={cn(styles.image_container, {
+                  [styles.hovered]: [0, 1, 2, 3, 5, 6].includes(hoverIndex)
+                })}
+                onMouseEnter={() => handleHover(4)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Horror} alt="horror" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи ужасов
+                </H>
+              </Link>
+              <Link
+                to="/detective"
+                className={cn(styles.image_container, {
+                  [styles.hovered]: [0, 1, 2, 3, 4, 6].includes(hoverIndex)
+                })}
+                onMouseEnter={() => handleHover(5)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Detective} alt="detective" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи детективов
+                </H>
+              </Link>
+              <Link
+                to="/fantasy"
+                className={cn(styles.image_container, styles.fantasy, {
+                    [styles.hovered]: [0, 1, 2, 3, 4, 5].includes(hoverIndex)
+                })}
+                onMouseEnter={() => handleHover(6)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <img src={Fantastic} alt="Fantastic" />
+                <H type="h3" className={cn(styles.sub, HStyle.h3)}>
+                  Персонажи детективов
                 </H>
               </Link>
           </div>
@@ -158,27 +217,15 @@ export const App = () => {
             </List>
           </div>
         </section>
-        <div className={cn(styles.center_block)}>
-            <H type={"h2"}>Отзывы</H>
-          </div>
         <div className={styles.feedback}>
-            <div className={styles.bg}>
-                <div className={styles.card}>
-                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Степан</H>
-                     <H type={"h3"}><q>Сайт просто пушечный, каждый вечер захожу почитать про кино, рекомендую</q></H>
-                </div>
-            </div>
-            <div className={styles.bg}>
-                <div className={styles.card}>
-                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Николай</H>
-                     <H type={"h3"}><q>Лучший форум про киногероев, который я посещал. Затянуло с головой!!! 10/10</q></H>
-                </div>
-            </div>
-            <div className={styles.bg}>
-                <div className={styles.card}>
-                    <H type={"h3"} className={cn(HStyle.h3, styles.name)}>Георгий</H>
-                     <H type={"h3"}><q>Искал информацию про героя и нигде кроме данного сайта не мог найти</q></H>
-                </div>
+            <H type={"h2"}>Ваши <span>впечатления</span> о сайте</H>
+            <div className={styles.form}>
+                <Input state={"default"} placeholder={"Ваше имя"} type={"text"}/>
+                <Input state={"default"} placeholder={"E-mail"} type={"email"}/>
+                <Input state={"default"} placeholder={"Телефон"} type={"phone"}/>
+                <Input state={"default"} placeholder={"Персонаж"} type={"text"}/>
+                <Textarea state={"default"} placeholder={"Ваше впечатление"} className={styles.textarea}/>
+                <Button type={"primary"} state={"default"} className={styles.send}>Отправить</Button>
             </div>
         </div>
     </>

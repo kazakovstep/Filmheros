@@ -12,67 +12,15 @@ export const Header = ({
   className,
   ...props
 }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
-
-  const handleDropdownToggle = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   return (
     <header className={cn(header.header, className)}>
         <Logo/>
         <nav className={header.nav_comp}>
             <div className={cn(header.items, className)}>
-                <Button state={"default"} type={"text"} className={cn(header.textButton, className)} onClick={handleDropdownToggle}>Каталог</Button>
-                {showDropdown && (
-                            <div className={cn(header.dropdown)}>
-                               <Link to={"/superheros"}><Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Супергерои
-                              </Button></Link>
-                              <Link to={"/shooters"}><Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Персонажи боевиков
-                              </Button></Link>
-                              <Link to={"/comedy"}><Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Персонажи комедии
-                              </Button></Link>
-                                <Link to={"/detective"}><Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Персонажи детективов
-                              </Button></Link>
-                                <Link to={"/horror"}>
-                                <Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Персонажи ужасов
-                              </Button></Link>
-                                <Link to={"/fantastic"}>
-                                   <Button
-                                state={"default"}
-                                type={"text"}
-                                className={cn(header.textButton, className)}
-                              >
-                                Персонажи фантастики
-                              </Button>
-                                </Link>
-                            </div>
-                          )}
+                <Link to={"/catalog"} className={header.link}>
+                    <Button state={"default"} type={"text"} className={cn(header.textButton, className)}>Каталог</Button>
+                </Link>
                 <Input placeholder={"Фильмы, новинки..."} type={"find"} className={cn(InputStyle.input,header.input)}/>
                 <Button state={"default"} type={"text"} className={cn(header.textButton)}>Новости</Button>
             </div>
