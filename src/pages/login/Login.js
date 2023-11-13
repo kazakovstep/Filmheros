@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { withAuthLayout } from "../../Layout/AuthLayout/AuthLayout";
 import styles from "../../style/Login.module.css";
 import cn from "classnames";
@@ -8,29 +8,47 @@ import { Input } from "../../components/Input/Input";
 import button from "../../components/Button/Button.module.css";
 import { Button } from "../../components/Button/Button";
 import {Logo} from "../../components/Logo/Logo";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
+import Captcha from "../../components/Captcha/Captcha";
 
 export const Login = () => {
 
-  var login = prompt("Введите логин:");
+  const [isCaptcha, setCaptcha] = useState(false);
+  const [emailState, setEmailState] = useState("default")
+  const [passwordState, setPasswordState] = useState("default")
+  const openCaptcha = () => {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z0-9!@#$%^&*()]{8,}$/;
 
-  if (login === "Админ") {
-    var password = prompt("Введите пароль:");
+    const Email = document.querySelector('input[placeholder="E-mail"]').value;
+    const Password = document.querySelector('input[placeholder="Пароль"]').value;
 
-    if (password === "Я главный") {
-      alert("Здравствуйте!");
-    } else if (password === "" || password === null) {
-      alert("Отменено");
-    } else {
-      alert("Неверный пароль");
+    if(Email && Password){
+      if(emailRegex.test(Email)){
+         setEmailState("default");
+      }
+      if(passwordRegex.test(Password)){
+         setPasswordState("default");
+      }
+      if(emailRegex.test(Email) && passwordRegex.test(Password)){
+        setCaptcha(true);
+      } else {
+        if(!emailRegex.test(Email)){
+          setEmailState("error-filled");
+        }
+        if(!passwordRegex.test(Password)){
+          setPasswordState("error-filled");
+        }
+      }
+    } else{
+      if(Email === ""){
+        setEmailState("error-filled");
+      }
+      if(Password === ""){
+        setPasswordState("error-filled");
+      }
     }
-
-  } else if (login === "" || login === null) {
-    alert("Отменено");
-  } else {
-    alert("Я вас не знаю");
   }
-
 
   return (
     <>
@@ -43,20 +61,21 @@ export const Login = () => {
           <Input
               type={"email"}
             className={cn(styles.input)}
-            state={"default"}
+            state={emailState}
             label={"E-mail"}
             placeholder={"E-mail"}
           ></Input>
           <Input
               type={"password"}
             className={cn(styles.input)}
-            state={"default"}
+            state={passwordState}
             label={"Пароль"}
             placeholder={"Пароль"}
           ></Input>
           <Button
             state={"default"}
             type={"primary"}
+            onClick={openCaptcha}
             className={cn(
               styles.form_item_button,
               button.default,
@@ -84,6 +103,7 @@ export const Login = () => {
             </Link>
           </div>
         </div>
+        {isCaptcha ? <Captcha/> : null}
       </div>
     </>
   );

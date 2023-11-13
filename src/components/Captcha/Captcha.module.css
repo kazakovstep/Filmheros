@@ -1,0 +1,22 @@
+.captcha{
+    width: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--primary-white);
+    border-radius: 1.25rem;
+    box-shadow: 0 0 20px 0 rgba(154, 154, 154, 0.10);
+}
+.form{
+    display: flex;
+    gap:1rem;
+}
+.form button{
+    width:40%;
+}
+.copy{
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
