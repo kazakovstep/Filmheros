@@ -7,7 +7,7 @@ import InputStyle from "../Input/Input.module.css"
 import HStyle from "../Htag/Htag.module.css"
 import cn from "classnames";
 
-const Captcha = (className) => {
+const Captcha = ({className, ...props}) => {
     const [attempt, setAttempt] = useState(1);
     const inputRef = useRef(null);
       const [isError, setError] = useState(false);
@@ -36,7 +36,7 @@ const Captcha = (className) => {
               }
           } else {
               if(randomProblemAnswer === parseInt(Answer,10)){
-                window.location.href = "/";
+                    window.location.href = "/";
               } else {
                   setError(true);
                   setAttempt(1);

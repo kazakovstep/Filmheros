@@ -69,3 +69,7 @@
 .list_text {
     color: var(--primary-black);
 }
+.captcha{
+    position: absolute;
+    top:15vh;
+}

@@ -13,6 +13,7 @@ import {Badge} from "../../components/Badge/Badge";
 import {Checkbox} from "../../components/Checkbox/Checkbox";
 import {Button} from "../../components/Button/Button";
 import PStyle from "../../components/Input/Input.module.css"
+import textarea from "../../components/Textarea/Textarea.module.css"
 
 const tags = [
   "Мужчина",
@@ -34,7 +35,7 @@ interface AdditionalForm {
   desc:string;
 }
 export const Advert = () => {
-////////////////////////состояния//////////////////////////////
+
     const [heroNameState, setHeroNameState] = useState("default");
     const [heroDescState, setHeroDescState] = useState("default");
     const [actorNameState, setActorNameState] = useState("default");
@@ -83,6 +84,7 @@ export const Advert = () => {
         categoriesValid && tagsValid && (!heroPicEmpty || heroPictures) && (!actorPicEmpty || actorPicture) && !FormEmpty
     ) {
       sessionStorage.setItem("advert", JSON.stringify(advert));
+      window.location.href = "/advert/summary";
     }
   }, [heroName, heroDesc, actorName, filmYear, filmName, advert, categoriesValid, tagsValid, heroPicEmpty, actorPicEmpty, FormEmpty]);
 
@@ -388,6 +390,7 @@ export const Advert = () => {
                         <option value={"2000"}>2000</option>
                       </Select>
                     <Textarea
+                        className={styles.textarea}
                       state={filmNameState}
                       type={"text"}
                       placeholder={"Название фильма"}
@@ -447,12 +450,14 @@ export const Advert = () => {
                 </div>
         ))}
                 {FormEmpty ? <p className={cn(PStyle.p_error_filled, styles.p)}>Необходимо написать/выбрать хотя бы один факт</p> : null}
-                <div className={styles.addbutton}>
-                    <Button type={"text"} state={"default"} onClick={handleAddLink}>Добавить факт</Button>
+                <div className={styles.addbuttonBlock}>
+                    <p></p>
+                    <p></p>
+                    <Button type={"text"} state={"default"} onClick={handleAddLink} className={styles.addbutton}>Добавить факт</Button>
                 </div>
             </div>
             <div className={styles.pubbutton}>
-                <Button state={"default"} type={"primary"} onClick={handleNext}>Опубликовать</Button>
+                <Button state={"default"} type={"primary"} onClick={handleNext}>Далее</Button>
             </div>
         </div>
     </>

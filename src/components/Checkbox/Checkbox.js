@@ -7,7 +7,7 @@ export const Checkbox=({form, checked, onChange})=>{
 
 
     const handleRadio = (e) => {
-        const targets: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[type="checkbox"]');
+        const targets: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[class="Checkbox_circle__DdGAP"]');
         targets.forEach((target) => {
             target.checked = false;
         });

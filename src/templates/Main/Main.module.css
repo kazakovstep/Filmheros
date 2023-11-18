@@ -6,6 +6,19 @@
   .advert{
     width: 90%!important;
   }
+  .account{
+    flex-direction: column;
+    margin-left: 0!important;
+    margin-right: 0!important;
+  }
+  .sidebar{
+    position: relative!important;
+    margin-top: 5rem!important;
+  }
+  .account_container{
+    margin-top: 5rem!important;
+    width: 100% !important;
+  }
 }
 
 .main{
@@ -40,4 +53,8 @@
 .account_container{
   margin-top: 10rem;
    width: 75%;
+}
+.summary{
+  width:90%;
+  margin: 0 auto;
 }

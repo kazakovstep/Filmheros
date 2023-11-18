@@ -8,7 +8,7 @@ import { Input } from "../../components/Input/Input";
 import button from "../../components/Button/Button.module.css";
 import { Button } from "../../components/Button/Button";
 import {Logo} from "../../components/Logo/Logo";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Captcha from "../../components/Captcha/Captcha";
 
 export const Login = () => {
@@ -32,6 +32,12 @@ export const Login = () => {
       }
       if(emailRegex.test(Email) && passwordRegex.test(Password)){
         setCaptcha(true);
+        const user = {
+                      email: document.querySelector('input[placeholder="E-mail"]')?.value,
+                      password: document.querySelector('input[placeholder="Пароль"]')?.value,
+                    };
+                    alert(JSON.stringify(user))
+                    sessionStorage.setItem("user", JSON.stringify(user));
       } else {
         if(!emailRegex.test(Email)){
           setEmailState("error-filled");
@@ -97,13 +103,13 @@ export const Login = () => {
           </div>
           <div className={styles.button_forget}>
             <Link to={"/password_reset"}>
-            <Button state={"default"} type={"text"}>
+              <Button state={"default"} type={"text"}>
                 Забыли пароль?
               </Button>
             </Link>
           </div>
         </div>
-        {isCaptcha ? <Captcha/> : null}
+        {isCaptcha ? <Captcha className={styles.captcha}/> : null}
       </div>
     </>
   );

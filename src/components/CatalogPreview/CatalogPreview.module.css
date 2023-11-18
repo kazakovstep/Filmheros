@@ -1,3 +1,16 @@
+@media (max-width: 960px){
+    .actual_block{
+        flex-direction: column;
+    }
+    .price_container{
+        flex-direction: row!important;
+        width: 100% !important;
+    }
+    .info_container{
+        width: 100% !important;
+    }
+}
+
 .actual_block{
     display: flex;
     gap:1.25rem;
