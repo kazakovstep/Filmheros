@@ -18,7 +18,6 @@ export const CatalogSidebar = ({
               <Filter state={"default"} type={"category"}/>
               <Filter state={"default"} type={"tags"}/>
           </div>
-          <Button state={"default"} type={"text"}>Сбросить фильтры</Button>
       </div>
     </>
   );

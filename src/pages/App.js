@@ -49,7 +49,7 @@ export const App = () => {
           </div>
           <div className={cn(styles.popular_categories)}>
               <Link
-                to="/superheros"
+                to="/catalog?category=Супергерои"
                 className={cn(styles.image_container, styles.superheros, {
                   [styles.hovered]: [5, 1, 2, 3, 4, 6].includes(hoverIndex)
                 })}
@@ -62,20 +62,20 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/shooters"
+                to="/catalog?category=Персонажи детективов"
                 className={cn(styles.image_container,styles.shooters, {
                   [styles.hovered]: [0, 5, 2, 3, 4, 6].includes(hoverIndex)
                 })}
                 onMouseEnter={() => handleHover(1)}
                 onMouseLeave={handleMouseLeave}
               >
-                <img src={Shooter} alt="Shooter" />
+                <img src={Shooter} alt="Персонажи боевиков" />
                 <H type="h3" className={cn(styles.sub, HStyle.h3)}>
                   Персонажи боевиков
                 </H>
               </Link>
               <Link
-                to="/adventure"
+                to="/catalog?category=Персонажи приключений"
                 className={cn(styles.image_container, styles.adventure, {
                   [styles.hovered]: [0, 1, 5, 3, 4, 6].includes(hoverIndex)
                 })}
@@ -88,7 +88,7 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/comedy"
+                to="/catalog?category=Персонажи комедии"
                 className={cn(styles.image_container, styles.comedians, {
                   [styles.hovered]: [0, 1, 2, 5, 4, 6].includes(hoverIndex)
                 })}
@@ -101,7 +101,7 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/horror"
+                to="/catalog?category=Персонажи ужасов"
                 className={cn(styles.image_container, {
                   [styles.hovered]: [0, 1, 2, 3, 5, 6].includes(hoverIndex)
                 })}
@@ -114,7 +114,7 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/detective"
+                to="/catalog?category=Персонажи детективов"
                 className={cn(styles.image_container, {
                   [styles.hovered]: [0, 1, 2, 3, 4, 6].includes(hoverIndex)
                 })}
@@ -127,7 +127,7 @@ export const App = () => {
                 </H>
               </Link>
               <Link
-                to="/fantasy"
+                to="/catalog?category=Персонажи фантастики"
                 className={cn(styles.image_container, styles.fantasy, {
                     [styles.hovered]: [0, 1, 2, 3, 4, 5].includes(hoverIndex)
                 })}

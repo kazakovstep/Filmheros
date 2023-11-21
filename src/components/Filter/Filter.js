@@ -31,7 +31,6 @@ export const Filter = ({state = "default",
     const[visibleTags, setVisibleTags] = useState(false);
     const[visibleCategories, setVisibleCategories] = useState(false);
   const [arrowRotation, setArrowRotation] = useState(false);
-
     const handleVisibleTagsClick = () => {
         setVisibleTags(!visibleTags);
         setArrowRotation(!arrowRotation);
@@ -42,6 +41,21 @@ export const Filter = ({state = "default",
         setArrowRotation(!arrowRotation);
     }
 
+    const url = new URL(window.location.href);
+    const param = new URLSearchParams(url.search);
+    const paramValue = param.get('category');
+
+    const [selectedCategories, setSelectedCategories] = useState(paramValue ? [paramValue] : []);
+
+    const handleBadgeChangeCategories = (value: string) => {
+      if (selectedCategories.includes(value)) {
+        setSelectedCategories(selectedCategories.filter((item) => item !== value));
+      } else {
+        if (selectedCategories.length < 1) {
+          setSelectedCategories([...selectedCategories, value]);
+        }
+      }
+    };
 
 
     return (
@@ -62,7 +76,6 @@ export const Filter = ({state = "default",
                         [styles.tags_click_sex]: visibleTags,
                         [styles.tags_sex]: !visibleTags,
                     })}>
-                        <Input state={"default"} type={"search"} placeholder={"Поиск по тегам"}/>
                         <div className={cn(styles.badge_list)}>
                             {tags.map((tag, index) => (
                                 <Badge key={index} type="tag" size="small">
@@ -76,10 +89,10 @@ export const Filter = ({state = "default",
                         [styles.tags_click]: visibleCategories,
                         [styles.tags]: !visibleCategories,
                     })}>
-                        <Input state={"default"} type={"search"} placeholder={"Поиск по тегам"}/>
                         <div className={cn(styles.badge_list)}>
                             {categories.map((category, index) => (
-                              <Badge key={index} type="category" size="small">
+                              <Badge key={index} type="category" size="small" checked={selectedCategories.includes(category)}
+                                     onChange={handleBadgeChangeCategories}>
                                 {category}
                               </Badge>
                             ))}

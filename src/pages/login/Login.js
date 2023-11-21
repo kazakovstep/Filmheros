@@ -59,7 +59,7 @@ export const Login = () => {
   return (
     <>
       <div className={cn(styles.auth)}>
-        <Logo/>
+        <Logo className={styles.logo}/>
         <H type={"h2"} className={cn(styles.title, Htag.h2)}>
           Вход в аккаунт
         </H>

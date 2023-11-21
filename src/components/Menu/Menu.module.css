@@ -26,8 +26,8 @@
     margin-top: 13rem!important;
 }
 .input{
-    width: 50% !important;
-    padding: 0!important;
+    justify-content: space-around;
+    width: 100% !important;
 }
 .addButton{
     width: 90%!important;

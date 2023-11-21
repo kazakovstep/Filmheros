@@ -51,8 +51,8 @@ export const Menu = ({
           {isClicked ?
             <>
                 <div className={styles.menu}>
-                    <Input placeholder={"Фильмы..."} type={"find"} className={cn(InputStyle.input,styles.input)}/>
-                    <Button state={"default"} type={"primary"} onClick={handleCatalogClick}>Каталог</Button>
+                    <Input placeholder={"Фильмы..."} className={cn(InputStyle.input,styles.input)}/>
+                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handleCatalogClick}>Каталог</Button>
                     <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handlAdvertClick}>Добавить статью</Button>
                 </div>
             </>

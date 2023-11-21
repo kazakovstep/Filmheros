@@ -8,9 +8,8 @@ import {List} from "../../components/List/List";
 import {Badge} from "../../components/Badge/Badge";
 import list from "../../components/List/List.module.css"
 import {Button} from "../../components/Button/Button";
-import Arrow from "../../images/arrow.svg"
-import {Link} from "react-router-dom";
-export function Summary(): JSX.Element {
+import {Link, useLocation} from "react-router-dom";
+export function AdvertCatalog(): JSX.Element {
 
     const [heroName, setHeroName] = useState("");
     const [heroDesc, setHeroDesc] = useState("");
@@ -24,70 +23,37 @@ export function Summary(): JSX.Element {
     const [heroPics, setHeroPics] = useState([]);
     const [actorPic, setActorPic] = useState("");
 
+    const { search } = useLocation();
+    const params = new URLSearchParams(search);
+    const advertId = params.get("advert_id");
+
     useEffect(() => {
-        const advertStorage = sessionStorage.getItem("advert");
+        const advertStorage = localStorage.getItem("adverts");
         if (advertStorage) {
-            const parsedAdvert = JSON.parse(advertStorage);
-            const heroName = parsedAdvert.heroName;
-            const heroDesc = parsedAdvert.heroDesc;
-            const actorName = parsedAdvert.actorName;
-            const filmName = parsedAdvert.filmName;
-            const filmYear = parsedAdvert.filmYear;
-            const facts = parsedAdvert.facts;
-            const importantFact = parsedAdvert.importantFact;
-            const heroPics = parsedAdvert.heroPics;
-            const actorPic = parsedAdvert.actorPic;
-            const selectedCategories = parsedAdvert.selectedCategories;
-            const selectedTags = parsedAdvert.selectedTags;
-            setHeroDesc(heroDesc);
-            setHeroName(heroName);
-            setActorName(actorName);
-            setFilmName(filmName);
-            setFilmYear(filmYear);
-            setFacts(facts);
-            setImportantFact(importantFact);
-            setHeroPics(heroPics);
-            setActorPic(actorPic);
-            setSelectedCategories(selectedCategories);
-            setSelectedTags(selectedTags);
+            const adverts = JSON.parse(advertStorage);
+            const ad = adverts[advertId];
+            if (ad) {
+                setHeroDesc(ad.heroDesc);
+                setHeroName(ad.heroName);
+                setActorName(ad.actorName);
+                setFilmName(ad.filmName);
+                setFilmYear(ad.filmYear);
+                setFacts(ad.facts);
+                setImportantFact(ad.importantFact);
+                setHeroPics(ad.heroPics);
+                setActorPic(ad.actorPic);
+                setSelectedCategories(ad.selectedCategories);
+                setSelectedTags(ad.selectedTags);
+            }
         }
-    }, []);
-
-    const handlePublish = () => {
-        const advert = {
-            heroName,
-            heroDesc,
-            actorName,
-            filmName,
-            filmYear,
-            facts,
-            importantFact,
-            heroPics,
-            actorPic,
-            selectedCategories,
-            selectedTags,
-          };
-
-        const existingAdverts = localStorage.getItem("adverts");
-        const adverts = existingAdverts ? JSON.parse(existingAdverts) : [];
-
-        adverts.push(advert);
-
-        localStorage.setItem("adverts", JSON.stringify(adverts));
-
-        sessionStorage.clear();
-
-        window.location.href = "/catalog";
-    }
+    }, [advertId]);
 
 
     return <>
         <div className={cn(styles.title_block)}>
-            <H type={"h2"} className={cn(styles.title, Htag.h2)}>Проверьте данные перед публикацией объявления</H>
-            <H type={"h3"} className={cn(styles.title_mobile, Htag.h3)}>Проверьте данные перед публикацией объявления</H>
-            <H type={"body"} className={cn(styles.text, Htag.body)}>После публикации, объявление нельзя будет
-                отредактировать.</H>
-            <H type={"body"} className={cn(Htag.body)}>Сейчас вы видите его так же, как потенциальный читатель.</H>
+            <H type={"h2"} className={cn(styles.title, Htag.h2)}>Приятного чтения интересных фактов о {heroName}</H>
+            <H type={"h3"} className={cn(styles.title_mobile, Htag.h3)}>Приятного чтения интересных фактов о {heroName}</H>
+            <H type={"body"} className={cn(styles.text, Htag.body)}>Если вы с чем-то не согласны, не судите автора строго,<br/>напишите в поддержку на главной странице сайта</H>
         </div>
         <div className={cn(styles.advert)}>
             <List orientation={"vertical"} className={cn(list.v_ul, styles.ul)}>
@@ -147,12 +113,12 @@ export function Summary(): JSX.Element {
             ))}
         </div> : null}
         <div className={styles.buttons}>
-            <Link to={"/advert"}>
-                <Button state={"default"} type={"back"} icon_url={Arrow}>Назад</Button>
+            <div></div>
+            <Link to={"/catalog"}>
+                <Button state={"default"} type={"primary"} className={cn(styles.button)}>В каталог</Button>
             </Link>
-            <Button state={"default"} type={"primary"} onClick={handlePublish} className={cn(styles.button)}>Опубликовать</Button>
         </div>
     </>
 }
 
-export default withSummaryAdvertLayout(Summary);
+export default withSummaryAdvertLayout(AdvertCatalog);

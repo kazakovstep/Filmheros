@@ -1,13 +1,14 @@
 import {withCatalogLayout} from "../../Layout/CatalogLayout/CatalogLayout";
 import React, {useLayoutEffect, useState} from "react";
 import {CatalogPreview} from "../../components/CatalogPreview/CatalogPreview";
+import queryString from 'query-string';
 
 export const Catalog = () => {
 
-    const [advertStorage, setAdvertStorage] = useState();
+    const [advertStorage, setAdvertStorage] = useState([]);
 
     useLayoutEffect(()=>{
-        const storedAdvert = localStorage.getItem("advert");
+        const storedAdvert = localStorage.getItem("adverts");
         if (storedAdvert) {
           setAdvertStorage(JSON.parse(storedAdvert));
         }
@@ -18,7 +19,16 @@ export const Catalog = () => {
   return (
     <>
         <CatalogPreview/>
-        <CatalogPreview data={advertStorage}/>
+        {advertStorage.map((ad, index) => (
+            <CatalogPreview
+                key={index}
+                data={ad}
+                link={{
+                  pathname: '/catalog/advert',
+                  search: queryString.stringify({ advert_id: index }),
+                }}
+            />
+        ))}
     </>
   );
 }

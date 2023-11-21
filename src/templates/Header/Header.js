@@ -10,9 +10,9 @@ export const Header = ({
   className,
   ...props
 }) => {
-  const handleCatalogClick = () => {
-    const user = sessionStorage.getItem('user');
 
+    const user = sessionStorage.getItem('user');
+  const handleCatalogClick = () => {
     if (!user) {
       window.location.href= "/login"
     } else {
@@ -21,8 +21,6 @@ export const Header = ({
   }
 
   const handlAdvertClick = () => {
-    const user = sessionStorage.getItem('user');
-
     if (!user) {
       window.location.href= "/login"
     } else {
@@ -36,9 +34,8 @@ export const Header = ({
         <nav className={header.nav_comp}>
             <div className={cn(header.items, className)}>
                 <Button state={"default"} type={"text"} className={cn(header.textButton, className)} onClick={handleCatalogClick}>Каталог</Button>
-                <Input placeholder={"Фильмы, новинки..."} type={"find"} className={cn(InputStyle.input,header.input)}/>
             </div>
-            <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)} onClick={handlAdvertClick}>Добавить статью</Button>
+            <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)} onClick={handlAdvertClick}>{user ? "Добавить статью" : "Войти"}</Button>
         </nav>
         <nav className={header.nav_mob}>
             <Menu/>

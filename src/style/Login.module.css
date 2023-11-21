@@ -9,7 +9,9 @@
     .title{
         text-align: center;
     }
-
+    .logo{
+        margin: 5% 15%;
+    }
 }
 
 .auth {
@@ -17,6 +19,7 @@
     margin-left: 20%;
 }
 .input{
+    margin-top: 1.5rem!important;
     background: var(--primary-white) !important;
 }
 .title,
@@ -71,5 +74,5 @@
 }
 .captcha{
     position: absolute;
-    top:15vh;
+    top:25vh;
 }

@@ -2,7 +2,7 @@
     .actual_block{
         flex-direction: column;
     }
-    .price_container{
+    .like_container{
         flex-direction: row!important;
         width: 100% !important;
     }
@@ -75,7 +75,7 @@
     gap: 0.5rem;
     width: max-content;
 }
-.price_container{
+.like_container {
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -84,9 +84,10 @@
     width: 35%;
     gap: 1.25rem;
 }
-.price_container_sold{
+.link_block{
+    width: 65%;
     display: flex;
-    text-align: center;
+    gap:1.25rem;
 }
 .button{
     font-size: 1.125rem!important;
@@ -117,25 +118,6 @@
     transition: 0ms!important;
     background: var(--secondary-pink);
 }
-.sold_block{
-    border-radius: 1.25rem;
-    display: flex;
-    gap:1.25rem;
-    width:80%;
-    padding: 2.5rem 3rem;
-    box-shadow: 0 0 20px 0 rgba(154, 154, 154, 0.10);
-    background: var(--primary-light-grey)!important;
-}
-.sold_block:hover{
-    cursor: pointer;
-}
-.info_container_sold{
-    width: 63%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .img {
   border-radius: 100%;
   width: 100%;
