@@ -46,13 +46,15 @@
     }
     .buttons{
         grid-template-columns: 1fr 1fr!important;
-        width: 100% !important;
-        margin: 10rem 0!important;
+        margin: 10rem auto!important;
         align-items: center;
         grid-gap: 0.5rem;
     }
     .button{
         padding: 1rem 1.5rem!important;
+    }
+    .catalogAdvert{
+        grid-template-columns: 1fr!important;
     }
 }
 .title_mobile{

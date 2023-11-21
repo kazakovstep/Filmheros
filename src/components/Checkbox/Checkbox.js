@@ -1,30 +1,29 @@
 import styles from './Checkbox.module.css';
 
-export const Checkbox=({form, checked, onChange})=>{
+export const Checkbox=({form,id, checked, onChange})=>{
     const handleCheckbox = (e) => {
         onChange && onChange(e.target.checked);
       };
 
 
     const handleRadio = (e) => {
-        const targets: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[class="Checkbox_circle__DdGAP"]');
-        targets.forEach((target) => {
-            target.checked = false;
-        });
-        e.target.checked = true;
+      const targets = document.querySelectorAll('input[id="checkbox"]');
+      targets.forEach((target) => {
+        target.checked = target === e.target;
+      });
     }
 
     switch(form){
         case 'square':
             return <>
                 <div className={styles.wrapper}>
-                    <input className={styles.square} type="checkbox" checked={checked} onChange={handleCheckbox}/>
+                    <input className={styles.square} id={id} type="checkbox" checked={checked} onChange={handleCheckbox}/>
                 </div>
             </>;
         case 'circle':
             return <>
                 <div className={styles.wrapper}>
-                    <input className={styles.circle} type="checkbox" checked={checked} onChange={handleRadio}/>
+                    <input className={styles.circle} id={id} type="checkbox" checked={checked} onChange={handleRadio}/>
                 </div>
             </>;
         default:

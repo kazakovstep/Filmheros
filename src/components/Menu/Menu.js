@@ -19,26 +19,22 @@ export const Menu = ({
     const handleIsClicked = () => {
         setClicked(!isClicked)
     }
-
-     const handleCatalogClick = () => {
     const user = sessionStorage.getItem('user');
-
-    if (!user) {
-      window.location.href= "/login"
-    } else {
-      window.location.href= "/catalog"
+    const handleCatalogClick = () => {
+        if (!user) {
+          window.location.href= "/login"
+        } else {
+          window.location.href= "/catalog"
+        }
     }
-  }
 
-  const handlAdvertClick = () => {
-    const user = sessionStorage.getItem('user');
-
-    if (!user) {
-      window.location.href= "/login"
-    } else {
-      window.location.href= "/advert"
+    const handlAdvertClick = () => {
+        if (!user) {
+            window.location.href= "/login"
+        } else {
+            window.location.href= "/advert"
+        }
     }
-  }
 
 
   return(
@@ -51,9 +47,8 @@ export const Menu = ({
           {isClicked ?
             <>
                 <div className={styles.menu}>
-                    <Input placeholder={"Фильмы..."} className={cn(InputStyle.input,styles.input)}/>
                     <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handleCatalogClick}>Каталог</Button>
-                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handlAdvertClick}>Добавить статью</Button>
+                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handlAdvertClick}>{user ? "Добавить статью" : "Войти"}</Button>
                 </div>
             </>
           : null}

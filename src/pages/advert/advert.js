@@ -418,7 +418,7 @@ export const Advert = () => {
                 <H type={"body-bold"}>Интересные факты</H>
                 <H type={"caption"}>Напишите интеречные факты и выберите самый интересный из них</H>
                 <div className={styles.checkbox_form}>
-                    <Checkbox form={"circle"}/>
+                    <Checkbox form={"circle"} id={"checkbox"}/>
                     <Input
                       state={"default"}
                       type={"text"}
@@ -434,7 +434,7 @@ export const Advert = () => {
                 </div>
                 {additionalForms.map(() => (
           <div className={styles.checkbox_form}>
-                    <Checkbox form={"circle"}/>
+                    <Checkbox form={"circle"} id={"checkbox"}/>
                     <Input
                       state={"default"}
                       type={"text"}
