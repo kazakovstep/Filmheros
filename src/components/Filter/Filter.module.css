@@ -56,7 +56,7 @@
 .tags_click{
     transition: height 1000ms, opacity 500ms;
     opacity: 1;
-    height: 23rem;
+    height: 20rem;
 }
 .tags_click_sex{
     transition: height 1000ms, opacity 500ms;

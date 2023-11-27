@@ -5,11 +5,11 @@
 }
 .sidebar {
   display: flex;
-  padding: 4.7rem;
+  padding: 3rem;
   flex-direction: column;
   border-radius: 1.25rem;
   box-shadow: 0 0 20px 0 rgba(154, 154, 154, 0.10);
-  width: 30%;
+  width: 25%;
   max-height: 40rem;
   overflow-y: auto;
   align-items: center;

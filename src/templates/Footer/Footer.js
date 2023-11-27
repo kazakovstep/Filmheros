@@ -7,11 +7,15 @@ import Vk from "../../images/vk.svg"
 import Tg from "../../images/tg.svg"
 import Tn from "../../images/tenchat.svg"
 import {Logo} from "../../components/Logo/Logo";
+import {Link} from "react-router-dom";
 
 export const Footer = ({
   className,
   ...props
 }) => {
+
+    const user = sessionStorage.getItem("user");
+
   return (
     <footer className={cn(footer.footer, className)}>
       <ul className={cn(footer.v_ul)}>
@@ -28,7 +32,9 @@ export const Footer = ({
                   <H type={"body"} className={cn(footer.item, Htag.body)}>Наша электронная почта</H>
                 </a>
               </address>
-              <H type={"h3"}>Блог</H>
+              <Link to={user ? "/catalog" : "/login"}>
+                  <H type={"h3"}>Каталог</H>
+              </Link>
               <address>
                 <H type={"body"} className={cn(footer.cr, Htag.body)}>
                   © ООО «Киногерои» 2023

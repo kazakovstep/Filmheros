@@ -12,7 +12,6 @@ import New_password from "./pages/password/new_password";
 import Advert from "./pages/advert/advert";
 import Catalog from "./pages/catalog/Catalog";
 import Summary from "./pages/advert/summary";
-import Task11 from "./pages/task11/task11";
 import AdvertCatalog from "./pages/catalog/advert";
 ReactDOM.render(
   <React.StrictMode>
@@ -27,7 +26,6 @@ ReactDOM.render(
             <Route path={"/advert"} element={<Advert/>} />
             <Route path={"/catalog"} element={<Catalog/>} />
             <Route path={"/advert/summary"} element={<Summary/>} />
-            <Route path={"/task11"} element={<Task11/>} />
             <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
         </Routes>
     </BrowserRouter>
