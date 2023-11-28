@@ -1,5 +1,4 @@
 import sidebar from "./CatalogSidebar.module.css";
-import {Button} from "../../components/Button/Button";
 import {Input} from "../../components/Input/Input";
 import {Filter} from "../../components/Filter/Filter";
 import cn from "classnames";

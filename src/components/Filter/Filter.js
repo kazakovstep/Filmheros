@@ -3,7 +3,6 @@ import cn from "classnames";
 import React from "react";
 import Arrow from "../../images/arrow_down.svg";
 import {H} from "../Htag/Htag";
-import {Input} from "../Input/Input";
 import {Badge} from "../Badge/Badge";
 import {useState} from "react";
 

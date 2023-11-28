@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { withAuthLayout } from "../../Layout/AuthLayout/AuthLayout";
 import styles from "../../style/Login.module.css";
 import cn from "classnames";

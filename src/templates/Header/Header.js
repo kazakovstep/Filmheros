@@ -3,8 +3,6 @@ import header from "./Header.module.css";
 import {Logo} from "../../components/Logo/Logo";
 import {Button} from "../../components/Button/Button";
 import buttonStyle from "../../components/Button/Button.module.css"
-import {Input} from "../../components/Input/Input";
-import InputStyle from "../../components/Input/Input.module.css"
 import {Menu} from "../../components/Menu/Menu"
 export const Header = ({
   className,

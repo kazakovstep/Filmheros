@@ -1,7 +1,7 @@
 import BellSVG from "../../images/bell.svg";
 import styles from "./Bell.module.css"
 import cn from "classnames";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Button} from "../Button/Button";
 import {H} from "../Htag/Htag";
 import {Input} from "../Input/Input";

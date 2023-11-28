@@ -1,5 +1,5 @@
 import {withCatalogLayout} from "../../Layout/CatalogLayout/CatalogLayout";
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {CatalogPreview} from "../../components/CatalogPreview/CatalogPreview";
 import queryString from 'query-string';
 import {getDataAll} from "../advert/advert";

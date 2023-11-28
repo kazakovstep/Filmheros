@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from "./Captcha.module.css"
 import {H} from "../Htag/Htag";
 import {Input} from "../Input/Input";

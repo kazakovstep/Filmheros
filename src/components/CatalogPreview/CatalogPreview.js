@@ -4,7 +4,6 @@ import {H} from "../Htag/Htag";
 import HStyle from "../Htag/Htag.module.css"
 import {Badge} from "../Badge/Badge";
 import {Button} from "../Button/Button";
-import Eye from "../../images/eye.svg";
 import Heart from "../../images/heart.svg"
 import BadgeStyle from "../Badge/Badge.module.css"
 import React, {useEffect, useState} from "react";

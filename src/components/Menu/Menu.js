@@ -2,11 +2,7 @@ import styles from "./Menu.module.css";
 import cn from "classnames";
 import { useState } from "react";
 import MenuSVG from "../../images/menu.svg"
-import header from "../../templates/Header/Header.module.css";
 import {Button} from "../Button/Button";
-import {Link} from "react-router-dom";
-import {Input} from "../Input/Input";
-import InputStyle from "../Input/Input.module.css";
 import buttonStyle from "../Button/Button.module.css";
 export const Menu = ({
   children,

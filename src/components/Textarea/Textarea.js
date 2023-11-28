@@ -16,7 +16,6 @@ export const Textarea = ({
     const [inputValue, setInputValue] = useState(value || "");
     const [isFilled, setIsFilled] = useState(!!value);
     const [isFocused, setIsFocused] = useState(false);
-    const [textareaHeight, setTextareaHeight] = useState("");
 
     useEffect(() => {
     setInputValue(value || "");
@@ -45,7 +44,6 @@ export const Textarea = ({
     const textarea = document.getElementById("Textarea");
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
-    setTextareaHeight(textarea.style.height);
   }, [inputValue]);
 
   return (
