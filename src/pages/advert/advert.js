@@ -13,7 +13,7 @@ import {Badge} from "../../components/Badge/Badge";
 import {Checkbox} from "../../components/Checkbox/Checkbox";
 import {Button} from "../../components/Button/Button";
 import PStyle from "../../components/Input/Input.module.css"
-import textarea from "../../components/Textarea/Textarea.module.css"
+import Dexie from 'dexie';
 
 const tags = [
   "Мужчина",
@@ -34,7 +34,53 @@ interface AdditionalForm {
   fact: string;
   desc:string;
 }
+
+const db = new Dexie('Filmheros');
+
+db.version(1).stores({
+    data: '++id, actorPic, heroPics, facts, heroName, heroDesc, actorName, filmYear, filmName, selectedCategories, selectedTags, importantFact',
+});
+
+interface DataModel {
+    id?: number;
+    heroName: string;
+    heroDesc: string;
+    actorName: string;
+    filmYear: string;
+    filmName: string;
+    actorPic: string;
+    heroPics: string[];
+    facts: { fact: string; desc: string }[];
+    selectedCategories: string,
+    selectedTags: string,
+    importantFact: { fact: string; desc: string }[]
+
+}
+
+export async function getData(): Promise<DataModel | undefined> {
+  try {
+    const allRecords = await db.table('data').toArray();
+    const lastRecord = allRecords.pop();
+    return lastRecord;
+  } catch (error) {
+    console.error('Error retrieving data from IndexedDB:', error);
+    return undefined;
+  }
+}
+
+export async function getDataAll(): Promise<DataModel[] | undefined> {
+    try {
+        const allRecords = await db.table('data').toArray();
+        return allRecords;
+    } catch (error) {
+        console.error('Error retrieving data from IndexedDB:', error);
+        return undefined;
+    }
+}
+
 export const Advert = () => {
+
+    const [flag, setFlag] = useState(false)
 
     const [heroNameState, setHeroNameState] = useState("default");
     const [heroDescState, setHeroDescState] = useState("default");
@@ -54,6 +100,7 @@ export const Advert = () => {
     const [actorPicture, setActorPicture] = useState("");
     const [heroPictures, setHeroPictures] = useState([]);
 
+
     const [FormEmpty, setFormEmpty] = useState(false);
 
   const [additionalForms, setAdditionalForms] = useState([]);
@@ -63,7 +110,7 @@ export const Advert = () => {
     const [actorName, setActorName] = useState("");
     const [filmYear, setFilmYear] = useState("");
     const [filmName, setFilmName] = useState("");
-    
+
    const [advert, setAdvert] = useState({
        heroName: "",
        heroDesc: "",
@@ -72,21 +119,18 @@ export const Advert = () => {
        filmName: "",
        selectedCategories: "",
        selectedTags: "",
-       heroPics: [],
-       actorPic: "",
-       facts: [],
        importantFact: []
     });
 
    useEffect(() => {
     if (
       heroName !== "" && heroDesc !== "" && actorName!=="" && filmYear!=="" && filmName!=="" &&
-        categoriesValid && tagsValid && (!heroPicEmpty || heroPictures) && (!actorPicEmpty || actorPicture) && !FormEmpty
+        categoriesValid && tagsValid && !actorPicEmpty && !heroPicEmpty && !FormEmpty && flag
     ) {
       sessionStorage.setItem("advert", JSON.stringify(advert));
       window.location.href = "/advert/summary";
     }
-  }, [heroName, heroDesc, actorName, filmYear, filmName, advert, categoriesValid, tagsValid, heroPicEmpty, actorPicEmpty, FormEmpty]);
+  }, [heroName, heroDesc, actorName, filmYear, filmName, advert, categoriesValid, tagsValid, actorPicEmpty, heroPicEmpty, FormEmpty, flag]);
 
    const [AdvertStorage, setAdvertStorage] = useState(advert);
    useEffect(() => {
@@ -95,16 +139,22 @@ export const Advert = () => {
           setAdvertStorage(JSON.parse(storedAdvert));
         }
    }, [advert])
+
     useEffect(() => {
     const choosenTags = AdvertStorage.selectedTags;
     const choosenCategories = AdvertStorage.selectedCategories;
-    const actorpic = AdvertStorage.actorPic;
-    const heropics = AdvertStorage.heroPics;
-    setHeroPictures(heropics);
-    setActorPicture(actorpic);
     setSelectedTags(choosenTags);
     setSelectedCategories(choosenCategories);
   }, [AdvertStorage]);
+
+   useEffect(() => {
+      getData().then((storedData) => {
+        if (storedData) {
+          setActorPicture(storedData.actorPic);
+          setHeroPictures(storedData.heroPics);
+        }
+      });
+    }, []);
 
     const handleAddLink = () => {
     setAdditionalForms((prevForms: AdditionalForm[]) => [
@@ -268,25 +318,42 @@ export const Advert = () => {
                 reader.onerror = reject;
             });
         });
-        Promise.all(heroFilesPromises).then((results) => {
+        Promise.all(heroFilesPromises).then(async (results) => {
             let heroPics = results;
-            if(heroPics.length===0){
+            if (heroPics.length === 0) {
                 heroPics = heroPictures;
                 setHeroPicEmpty(false);
             }
             setAdvert({
-                    heroName,
-                    heroDesc,
-                    actorName,
-                    filmYear,
-                    filmName,
-                    selectedTags,
-                    selectedCategories,
-                    actorPic,
-                    heroPics,
-                    facts,
-                    importantFact,
-                });
+                heroName,
+                heroDesc,
+                actorName,
+                filmYear,
+                filmName,
+                selectedTags,
+                selectedCategories,
+                importantFact,
+            });
+            const newData: DataModel = {
+                heroName,
+                heroDesc,
+                actorName,
+                filmYear,
+                filmName,
+                selectedTags,
+                selectedCategories,
+                importantFact,
+                heroPics,
+                actorPic,
+                facts
+            };
+
+            try {
+                await db.table('data').add(newData);
+                setFlag(true);
+            } catch (error) {
+                console.error('Error saving data to IndexedDB:', error);
+            }
         });
 
     };

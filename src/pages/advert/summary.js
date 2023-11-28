@@ -10,6 +10,7 @@ import list from "../../components/List/List.module.css"
 import {Button} from "../../components/Button/Button";
 import Arrow from "../../images/arrow.svg"
 import {Link} from "react-router-dom";
+import {getData} from "./advert";
 export function Summary(): JSX.Element {
 
     const [heroName, setHeroName] = useState("");
@@ -33,10 +34,7 @@ export function Summary(): JSX.Element {
             const actorName = parsedAdvert.actorName;
             const filmName = parsedAdvert.filmName;
             const filmYear = parsedAdvert.filmYear;
-            const facts = parsedAdvert.facts;
             const importantFact = parsedAdvert.importantFact;
-            const heroPics = parsedAdvert.heroPics;
-            const actorPic = parsedAdvert.actorPic;
             const selectedCategories = parsedAdvert.selectedCategories;
             const selectedTags = parsedAdvert.selectedTags;
             setHeroDesc(heroDesc);
@@ -44,37 +42,26 @@ export function Summary(): JSX.Element {
             setActorName(actorName);
             setFilmName(filmName);
             setFilmYear(filmYear);
-            setFacts(facts);
             setImportantFact(importantFact);
-            setHeroPics(heroPics);
-            setActorPic(actorPic);
             setSelectedCategories(selectedCategories);
             setSelectedTags(selectedTags);
         }
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getData();
+            if (data) {
+                const {actorPic, heroPics, facts} = data;
+                setActorPic(actorPic);
+                setHeroPics(heroPics);
+                setFacts(facts);
+            }
+        };
+        fetchData();
+    }, []);
+
     const handlePublish = () => {
-        const advert = {
-            heroName,
-            heroDesc,
-            actorName,
-            filmName,
-            filmYear,
-            facts,
-            importantFact,
-            heroPics,
-            actorPic,
-            selectedCategories,
-            selectedTags,
-          };
-
-        const existingAdverts = localStorage.getItem("adverts");
-        const adverts = existingAdverts ? JSON.parse(existingAdverts) : [];
-
-        adverts.push(advert);
-
-        localStorage.setItem("adverts", JSON.stringify(adverts));
-
         sessionStorage.clear();
 
         window.location.href = "/catalog";
@@ -96,12 +83,12 @@ export function Summary(): JSX.Element {
                         <H type={"h2"} className={cn(Htag.h2, styles.first_title)}>{heroName}</H>
                         <div className={styles.badges}>
                             <List orientation={"horizontal"} className={cn(styles.tags)}>
-                                {selectedCategories.map((category, index) => (
+                                {Array.isArray(selectedCategories) && selectedCategories.map((category, index) => (
                                     <Badge key={index} type={"category"} checked={false}>{category}</Badge>
                                 ))}
                             </List>
                             <List orientation={"horizontal"} className={cn(styles.tags)}>
-                                {selectedTags.map((tag, index) => (
+                                {Array.isArray(selectedTags) && selectedTags.map((tag, index) => (
                                     <Badge key={index} type={"tag"} checked={false}>{tag}</Badge>
                                 ))}
                             </List>

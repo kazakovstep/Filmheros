@@ -9,6 +9,7 @@ import {Badge} from "../../components/Badge/Badge";
 import list from "../../components/List/List.module.css"
 import {Button} from "../../components/Button/Button";
 import {Link, useLocation} from "react-router-dom";
+import {getDataAll} from "../advert/advert";
 export function AdvertCatalog(): JSX.Element {
 
     const [heroName, setHeroName] = useState("");
@@ -28,11 +29,9 @@ export function AdvertCatalog(): JSX.Element {
     const advertId = params.get("advert_id");
 
     useEffect(() => {
-        const advertStorage = localStorage.getItem("adverts");
-        if (advertStorage) {
-            const adverts = JSON.parse(advertStorage);
-            const ad = adverts[advertId];
-            if (ad) {
+        getDataAll().then((storedData) => {
+            if (storedData) {
+                const ad = storedData[advertId];
                 setHeroDesc(ad.heroDesc);
                 setHeroName(ad.heroName);
                 setActorName(ad.actorName);
@@ -45,8 +44,8 @@ export function AdvertCatalog(): JSX.Element {
                 setSelectedCategories(ad.selectedCategories);
                 setSelectedTags(ad.selectedTags);
             }
-        }
-    }, [advertId]);
+        });
+}, [advertId]);
 
 
     return <>

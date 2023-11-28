@@ -1,19 +1,20 @@
 import {withCatalogLayout} from "../../Layout/CatalogLayout/CatalogLayout";
-import React, {useLayoutEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {CatalogPreview} from "../../components/CatalogPreview/CatalogPreview";
 import queryString from 'query-string';
+import {getDataAll} from "../advert/advert";
 
 export const Catalog = () => {
 
     const [advertStorage, setAdvertStorage] = useState([]);
 
     useLayoutEffect(()=>{
-        const storedAdvert = localStorage.getItem("adverts");
-        if (storedAdvert) {
-          setAdvertStorage(JSON.parse(storedAdvert));
+        getDataAll().then((storedData) => {
+        if (storedData) {
+            setAdvertStorage(storedData);
         }
-    }, [])
-
+    });
+    }, [advertStorage])
 
 
   return (
