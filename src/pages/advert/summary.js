@@ -25,6 +25,8 @@ export function Summary(): JSX.Element {
     const [heroPics, setHeroPics] = useState([]);
     const [actorPic, setActorPic] = useState("");
 
+    const [link, setLink] = useState("");
+
     useEffect(() => {
         const advertStorage = sessionStorage.getItem("advert");
         if (advertStorage) {
@@ -63,16 +65,15 @@ export function Summary(): JSX.Element {
 
     const handlePublish = () => {
         sessionStorage.clear();
-
-        window.location.href = "/catalog";
+        setLink("/catalog");
     }
 
 
     return <>
         <div className={cn(styles.title_block)}>
-            <H type={"h2"} className={cn(styles.title, Htag.h2)}>Проверьте данные перед публикацией объявления</H>
-            <H type={"h3"} className={cn(styles.title_mobile, Htag.h3)}>Проверьте данные перед публикацией объявления</H>
-            <H type={"body"} className={cn(styles.text, Htag.body)}>После публикации, объявление нельзя будет
+            <H type={"h2"} className={cn(styles.title, Htag.h2)}>Проверьте данные перед публикацией статьи</H>
+            <H type={"h3"} className={cn(styles.title_mobile, Htag.h3)}>Проверьте данные перед публикацией статьи</H>
+            <H type={"body"} className={cn(styles.text, Htag.body)}>После публикации, статью нельзя будет
                 отредактировать.</H>
             <H type={"body"} className={cn(Htag.body)}>Сейчас вы видите его так же, как потенциальный читатель.</H>
         </div>
@@ -134,10 +135,10 @@ export function Summary(): JSX.Element {
             ))}
         </div> : null}
         <div className={styles.buttons}>
-            <Link to={"/advert"}>
-                <Button state={"default"} type={"back"} icon_url={Arrow}>Назад</Button>
+            <div></div>
+            <Link to={link !== "" ? link : null}>
+                <Button state={"default"} type={"primary"} onClick={handlePublish} className={cn(styles.button)}>Опубликовать</Button>
             </Link>
-            <Button state={"default"} type={"primary"} onClick={handlePublish} className={cn(styles.button)}>Опубликовать</Button>
         </div>
     </>
 }

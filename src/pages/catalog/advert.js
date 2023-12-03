@@ -112,6 +112,7 @@ export function AdvertCatalog(): JSX.Element {
             ))}
         </div> : null}
         <div className={cn(styles.buttons, styles.catalogAdvert)}>
+            <div></div>
             <Link to={"/catalog"}>
                 <Button state={"default"} type={"primary"} className={cn(styles.button)}>В каталог</Button>
             </Link>

@@ -14,6 +14,7 @@ import {Checkbox} from "../../components/Checkbox/Checkbox";
 import {Button} from "../../components/Button/Button";
 import PStyle from "../../components/Input/Input.module.css"
 import Dexie from 'dexie';
+import {Link} from "react-router-dom";
 
 const tags = [
   "Мужчина",
@@ -73,14 +74,15 @@ export async function getDataAll(): Promise<DataModel[] | undefined> {
         const allRecords = await db.table('data').toArray();
         return allRecords;
     } catch (error) {
-        console.error('Error retrieving data from IndexedDB:', error);
+        console.error('Ошибка получения данных из IndexedDB:', error);
         return undefined;
     }
 }
 
 export const Advert = () => {
 
-    const [flag, setFlag] = useState(false)
+    const [flag, setFlag] = useState(false);
+    const [link, setLink] = useState("");
 
     const [heroNameState, setHeroNameState] = useState("default");
     const [heroDescState, setHeroDescState] = useState("default");
@@ -127,8 +129,10 @@ export const Advert = () => {
       heroName !== "" && heroDesc !== "" && actorName!=="" && filmYear!=="" && filmName!=="" &&
         categoriesValid && tagsValid && !actorPicEmpty && !heroPicEmpty && !FormEmpty && flag
     ) {
-      sessionStorage.setItem("advert", JSON.stringify(advert));
-      window.location.href = "/advert/summary";
+        sessionStorage.setItem("advert", JSON.stringify(advert));
+        setLink("/advert/summary");
+    } else {
+        setLink("");
     }
   }, [heroName, heroDesc, actorName, filmYear, filmName, advert, categoriesValid, tagsValid, actorPicEmpty, heroPicEmpty, FormEmpty, flag]);
 
@@ -147,14 +151,14 @@ export const Advert = () => {
     setSelectedCategories(choosenCategories);
   }, [AdvertStorage]);
 
-   useEffect(() => {
+   /*useEffect(() => {
       getData().then((storedData) => {
         if (storedData) {
           setActorPicture(storedData.actorPic);
           setHeroPictures(storedData.heroPics);
         }
       });
-    }, []);
+    }, []);*/
 
     const handleAddLink = () => {
     setAdditionalForms((prevForms: AdditionalForm[]) => [
@@ -349,10 +353,12 @@ export const Advert = () => {
             };
 
             try {
-                await db.table('data').add(newData);
-                setFlag(true);
+                if (!flag) {
+                    await db.table('data').add(newData);
+                    setFlag(true);
+                }
             } catch (error) {
-                console.error('Error saving data to IndexedDB:', error);
+                console.error('Ошибка при создании IndexedDB:', error);
             }
         });
 
@@ -377,7 +383,7 @@ export const Advert = () => {
                   placeholder={"Имя киногероя"}
                   hint={"Например, Халк"}
                   label={"Имя киногероя"}
-                  value={AdvertStorage.heroName}
+                  value={heroName}
                 />
             </div>
             <div className={styles.input_container}>
@@ -387,7 +393,7 @@ export const Advert = () => {
                   placeholder={"Краткое описание персонажа"}
                   hint={"Например, Халк представляет собой альтер-эго Брюса Бэннера, который стал высокоэнергетическим громадином после неудачного эксперимента с гамма-радиацией...."}
                   label={"Описание"}
-                  value={AdvertStorage.heroDesc}
+                  value={heroDesc}
                 />
             </div>
             <div className={styles.input_container}>
@@ -418,7 +424,7 @@ export const Advert = () => {
                   placeholder={"Имя актера/актрисы"}
                   hint={"Например, Том Круз"}
                   label={"Имя актера/актрисы"}
-                  value={AdvertStorage.actorName}
+                  value={actorName}
                 />
             </div>
             <div className={styles.input_container}>
@@ -430,7 +436,7 @@ export const Advert = () => {
             <div className={styles.input_container}>
                 <H type={"body-bold"}>О каком фильме вы хотите рассказать?</H>
                 <div className={styles.film_form}>
-                    <Select state={filmYearState} placeholder={"Год выхода фильма"} hint={"Год выхода фильма"} className={styles.select} value={AdvertStorage.filmYear}>
+                    <Select state={filmYearState} placeholder={"Год выхода фильма"} hint={"Год выхода фильма"} className={styles.select} value={filmYear}>
                         <option value={"2023"}>2023</option>
                         <option value={"2022"}>2022</option>
                         <option value={"2021"}>2021</option>
@@ -463,7 +469,7 @@ export const Advert = () => {
                       placeholder={"Название фильма"}
                       hint={"Например, Мстители"}
                       label={"Название фильма"}
-                      value={AdvertStorage.filmName}
+                      value={filmName}
                     />
                 </div>
             </div>
@@ -524,7 +530,9 @@ export const Advert = () => {
                 </div>
             </div>
             <div className={styles.pubbutton}>
-                <Button state={"default"} type={"primary"} onClick={handleNext}>Далее</Button>
+                <Link to={link !== "" ? link : null}>
+                    <Button state={"default"} type={"primary"} onClick={handleNext}>Далее</Button>
+                </Link>
             </div>
         </div>
     </>

@@ -4,7 +4,7 @@ import './style/index.css';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Login from "./pages/login/Login";
+import Login from './pages/Login';
 import Register from "./pages/register/Register";
 import Register_reset from "./pages/password/Password_reset";
 import Verify from "./pages/password/Verify";
@@ -17,7 +17,6 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
         <Routes>
-            <Route path={"/"} element={<App/>}/>
             <Route path={"/login"} element={<Login/>} />
             <Route path={"/register"} element={<Register/>} />
             <Route path={"/password_reset"} element={<Register_reset/>} />
@@ -27,6 +26,7 @@ ReactDOM.render(
             <Route path={"/catalog"} element={<Catalog/>} />
             <Route path={"/advert/summary"} element={<Summary/>} />
             <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
+            <Route path={"/Filmheros"} element={<App/>}/>
         </Routes>
     </BrowserRouter>
   </React.StrictMode>,

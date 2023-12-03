@@ -10,7 +10,7 @@ const CatalogLayout = ({ children }): JSX.Element => {
     <>
       <Header/>
         <div className={cn(styles.account)}>
-            <CatalogSidebar className={styles.sidebar}/>
+            <CatalogSidebar className={styles.sidebarr}/>
             <div className={cn(styles.account_container)}>
                 <Main type={"account"}>
                     <div>

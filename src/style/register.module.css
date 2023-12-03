@@ -9,7 +9,9 @@
     .title{
         text-align: center;
     }
-
+    .logo{
+        margin: 5% 15%;
+    }
 }
 
 .auth {

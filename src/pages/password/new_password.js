@@ -15,6 +15,8 @@ function NewPassword(): JSX.Element {
     const [password, setPassword] = useState("");
     const [passwordState, setPasswordState] = useState("default");
 
+    const [link, setLink] = useState("");
+
     const handleCreatePassword = () => {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z0-9!@#$%^&*()]{8,}$/;
 
@@ -24,9 +26,11 @@ function NewPassword(): JSX.Element {
   setPasswordState("error-filled");
   }
 
-  if (passwordRegex.test(password)){
-    window.location.href = "/login";
-  }
+  if (passwordRegex.test(password)) {
+      setLink("/login");
+    } else {
+      setLink("");
+    }
 };
 
 
@@ -47,7 +51,7 @@ function NewPassword(): JSX.Element {
               hint={"Верхний/нижний регистр, цифры, спец.знак, 8 символов"}
               onChange={(e) => setPassword(e.target.value)}
           ></Input>
-            <Link to={"/login"}>
+             <Link to={link !== "" ? link : null}>
                       <Button
                   state={"default"}
                   type={"primary"}

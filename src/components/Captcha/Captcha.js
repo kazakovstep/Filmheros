@@ -29,14 +29,14 @@ const Captcha = ({className, ...props}) => {
           const Answer = document.querySelector('input[placeholder="Введите CAPTCHA"]').value;
           if(attempt === 1){
              if(randomString === Answer){
-                window.location.href = "/";
+                window.location.href = "Filmheros/";
               } else {
                  setError(true);
                   setAttempt(2);
               }
           } else {
               if(randomProblemAnswer === parseInt(Answer,10)){
-                    window.location.href = "/";
+                    window.location.href = "Filmheros/";
               } else {
                   setError(true);
                   setAttempt(1);

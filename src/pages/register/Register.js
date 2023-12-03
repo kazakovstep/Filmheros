@@ -39,15 +39,15 @@ function RegisterIndex(): JSX.Element {
   }
 
   if (emailRegex.test(email) && passwordRegex.test(password)){
-    sessionStorage.setItem("registrationData", JSON.stringify({ email, password }));
-    window.location.href = "/";
+    localStorage.setItem("user", JSON.stringify({ email, password }));
+    window.location.href = "Filmheros/";
   }
 };
 
   return (
       <>
         <div className={cn(styles.auth)}>
-          <Logo/>
+          <Logo className={styles.logo}/>
           <H type={"h2"} className={cn(styles.title, Htag.h2)}>
             Создайте аккаунт,<br></br> чтобы начать
           </H>

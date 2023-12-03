@@ -14,7 +14,7 @@ export const Footer = ({
   ...props
 }) => {
 
-    const user = sessionStorage.getItem("user");
+    const user = localStorage.getItem("user");
 
   return (
     <footer className={cn(footer.footer, className)}>
@@ -65,7 +65,7 @@ export const Footer = ({
                      </div>
                 </ul>
                 <H type={"body"} className={cn(footer.pc, Htag.body)}>
-                  Политика конфиденциальности
+                  Данный сайт разработал студент РТУ МИРЭА Казаков С.С. ИКБО-16-22<br/>Эл.почта: kazakov.step@yandex.ru
                 </H>
               </ul>
     </footer>
