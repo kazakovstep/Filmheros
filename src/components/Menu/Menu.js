@@ -2,12 +2,8 @@ import styles from "./Menu.module.css";
 import cn from "classnames";
 import { useState } from "react";
 import MenuSVG from "../../images/menu.svg"
-import header from "../../templates/Header/Header.module.css";
 import {Button} from "../Button/Button";
 import {Link} from "react-router-dom";
-import {Input} from "../Input/Input";
-import InputStyle from "../Input/Input.module.css";
-import buttonStyle from "../Button/Button.module.css";
 export const Menu = ({
   children,
   className,
@@ -19,22 +15,7 @@ export const Menu = ({
     const handleIsClicked = () => {
         setClicked(!isClicked)
     }
-    const user = sessionStorage.getItem('user');
-    const handleCatalogClick = () => {
-        if (!user) {
-          window.location.href= "/login"
-        } else {
-          window.location.href= "/catalog"
-        }
-    }
-
-    const handlAdvertClick = () => {
-        if (!user) {
-            window.location.href= "/login"
-        } else {
-            window.location.href= "/advert"
-        }
-    }
+    const user = localStorage.getItem('user');
 
 
   return(
@@ -47,8 +28,12 @@ export const Menu = ({
           {isClicked ?
             <>
                 <div className={styles.menu}>
-                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handleCatalogClick}>Каталог</Button>
-                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, styles.addButton)} onClick={handlAdvertClick}>{user ? "Добавить статью" : "Войти"}</Button>
+                    <Link to={user ? "/catalog" : "/login"} className={styles.addButton}>
+                        <Button state={"default"} type={"primary"}>Каталог</Button>
+                    </Link>
+                    <Link to={user ? "/advert" : "/login"} className={styles.addButton}>
+                        <Button state={"default"} type={"primary"}>{user ? "Добавить статью" : "Войти"}</Button>
+                    </Link>
                 </div>
             </>
           : null}
