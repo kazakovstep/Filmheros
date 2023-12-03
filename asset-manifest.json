@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Filmheros/static/css/main.111532ad.css",
-    "main.js": "/Filmheros/static/js/main.efd4cd75.js",
+    "main.js": "/Filmheros/static/js/main.1b4d430b.js",
     "static/js/787.1b6dfb57.chunk.js": "/Filmheros/static/js/787.1b6dfb57.chunk.js",
     "static/media/IronMan.jpeg": "/Filmheros/static/media/IronMan.e5067c9c60b55361c2a1.jpeg",
     "static/media/adventure.jpeg": "/Filmheros/static/media/adventure.b1f9e096582a594061d3.jpeg",
@@ -38,11 +38,11 @@
     "static/media/menu.svg": "/Filmheros/static/media/menu.293115a72ec553e8d5c46283d9e1d52b.svg",
     "static/media/arrow.svg": "/Filmheros/static/media/arrow.81f4268b515b3c08275fbb69a0233726.svg",
     "main.111532ad.css.map": "/Filmheros/static/css/main.111532ad.css.map",
-    "main.efd4cd75.js.map": "/Filmheros/static/js/main.efd4cd75.js.map",
+    "main.1b4d430b.js.map": "/Filmheros/static/js/main.1b4d430b.js.map",
     "787.1b6dfb57.chunk.js.map": "/Filmheros/static/js/787.1b6dfb57.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.111532ad.css",
-    "static/js/main.efd4cd75.js"
+    "static/js/main.1b4d430b.js"
   ]
 }
