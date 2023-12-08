@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Filmheros/static/css/main.4a5a25de.css",
-    "main.js": "/Filmheros/static/js/main.ad3544bd.js",
+    "main.js": "/Filmheros/static/js/main.3c1fa37e.js",
     "static/js/787.1b6dfb57.chunk.js": "/Filmheros/static/js/787.1b6dfb57.chunk.js",
     "static/media/IronMan.jpeg": "/Filmheros/static/media/IronMan.e5067c9c60b55361c2a1.jpeg",
     "static/media/adventure.jpeg": "/Filmheros/static/media/adventure.b1f9e096582a594061d3.jpeg",
@@ -10,10 +10,12 @@
     "static/media/Columbia.jpg": "/Filmheros/static/media/Columbia.b8b6c4917cfe1efcc62c.jpg",
     "static/media/Bond.jpg": "/Filmheros/static/media/Bond.6a418043bee9a8190fe2.jpg",
     "static/media/fantastic.jpg": "/Filmheros/static/media/fantastic.00076f8115465bba5cae.jpg",
+    "static/media/sg.jpeg": "/Filmheros/static/media/sg.106e9150b397e41b6e04.jpeg",
     "static/media/Superman.jpg": "/Filmheros/static/media/Superman.a947dcff4b94ab06846c.jpg",
     "static/media/superheros.jpg": "/Filmheros/static/media/superheros.26484144c2ff2a6fcf42.jpg",
     "static/media/voody.jpg": "/Filmheros/static/media/voody.2ceda4da715e444d0363.jpg",
     "static/media/detective.jpg": "/Filmheros/static/media/detective.318f492b02fb468f3f48.jpg",
+    "static/media/spider-man.jpg": "/Filmheros/static/media/spider-man.28ec32fe150a52c48e21.jpg",
     "static/media/Paramount.png": "/Filmheros/static/media/Paramount.2bbe76f2c4a461f544a6.png",
     "static/media/comedy.jpg": "/Filmheros/static/media/comedy.ec82283dd609acaa9e0b.jpg",
     "static/media/20th Century Fox.jpg": "/Filmheros/static/media/20th Century Fox.b190bb026b910f39e9b8.jpg",
@@ -36,11 +38,11 @@
     "static/media/menu.svg": "/Filmheros/static/media/menu.293115a72ec553e8d5c46283d9e1d52b.svg",
     "static/media/arrow.svg": "/Filmheros/static/media/arrow.81f4268b515b3c08275fbb69a0233726.svg",
     "main.4a5a25de.css.map": "/Filmheros/static/css/main.4a5a25de.css.map",
-    "main.ad3544bd.js.map": "/Filmheros/static/js/main.ad3544bd.js.map",
+    "main.3c1fa37e.js.map": "/Filmheros/static/js/main.3c1fa37e.js.map",
     "787.1b6dfb57.chunk.js.map": "/Filmheros/static/js/787.1b6dfb57.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4a5a25de.css",
-    "static/js/main.ad3544bd.js"
+    "static/js/main.3c1fa37e.js"
   ]
 }
