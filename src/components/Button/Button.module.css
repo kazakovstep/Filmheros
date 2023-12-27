@@ -55,8 +55,11 @@
 }
 
 .text {
-    background: none !important;
-    text-decoration: underline 0.125rem var(--secondary-pink);
+    background: none;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: var(--secondary-pink);
+    -webkit-text-decoration-line: underline;
     text-underline-offset: 5px;
 }
 

@@ -19,7 +19,6 @@ export const Catalog = () => {
 
   return (
     <>
-        <CatalogPreview/>
         {advertStorage.map((ad, index) => (
             <CatalogPreview
                 key={index}

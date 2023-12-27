@@ -36,7 +36,6 @@ export const Login = () => {
                       email: document.querySelector('input[placeholder="E-mail"]')?.value,
                       password: document.querySelector('input[placeholder="Пароль"]')?.value,
                     };
-                    alert(JSON.stringify(user))
                     localStorage.setItem("user", JSON.stringify(user));
       } else {
         if(!emailRegex.test(Email)){

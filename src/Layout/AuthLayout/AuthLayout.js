@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./AuthLayout.module.css";
 import {Footer} from "../../templates/Footer/Footer";
-import sg from "./sg.jpeg"
+import sg from "../../images/sg.jpeg"
 import cn from "classnames";
 import { Main } from "../../templates/Main/Main";
 const AuthLayout = ({ children }) => {

@@ -9,7 +9,7 @@ import Heart from "../../images/heart.svg"
 import BadgeStyle from "../Badge/Badge.module.css"
 import React, {useEffect, useState} from "react";
 import Favourite from "../../images/favourite.svg"
-import Spider from "./spider-man.jpg"
+import Spider from "../../images/spider-man.jpg"
 import {Link} from "react-router-dom";
 export const CatalogPreview = ({
   children,
