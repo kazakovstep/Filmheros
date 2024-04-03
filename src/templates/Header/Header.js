@@ -22,6 +22,9 @@ export const Header = ({
                 <Link to={user ? "/catalog" : "/login"} className={header.link}>
                      <Button state={"default"} type={"text"} className={cn(header.textButton, className)}>Каталог</Button>
                 </Link>
+                <Link to={user ? "/catalog" : "/login"} className={header.link}>
+                    <Button state={"default"} type={"text"} className={cn(header.textButton, className)}>привет</Button>
+                </Link>
             </div>
             <Link to={user ? "/advert" : "/login"} className={header.link}>
                 <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>{user ? "Добавить статью" : "Войти"}</Button>
