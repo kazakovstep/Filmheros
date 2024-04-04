@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style/index.css';
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Login from './pages/Login';
-import Register from "./pages/register/Register";
-import Register_reset from "./pages/password/Password_reset";
-import Verify from "./pages/password/Verify";
-import New_password from "./pages/password/new_password";
-import Advert from "./pages/advert/advert";
-import Catalog from "./pages/catalog/Catalog";
-import Summary from "./pages/advert/summary";
-import AdvertCatalog from "./pages/catalog/advert";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import App from './pages/App'
+import Login from './pages/Login'
+import Advert from "./pages/advert/advert"
+import Summary from "./pages/advert/summary"
+import Catalog from "./pages/catalog/Catalog"
+import AdvertCatalog from "./pages/catalog/advert"
+import Register_reset from "./pages/password/Password_reset"
+import Verify from "./pages/password/Verify"
+import New_password from "./pages/password/new_password"
+import Register from "./pages/register/Register"
+import reportWebVitals from './reportWebVitals'
+import './style/index.css'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -26,7 +26,7 @@ ReactDOM.render(
             <Route path={"/catalog"} element={<Catalog/>} />
             <Route path={"/advert/summary"} element={<Summary/>} />
             <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
-            <Route path={"/Filmheros"} element={<App/>}/>
+            <Route path={"/"} element={<App/>}/>
         </Routes>
     </BrowserRouter>
   </React.StrictMode>,
