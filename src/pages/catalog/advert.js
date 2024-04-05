@@ -1,58 +1,62 @@
-import cn from "classnames";
-import styles from "../../style/summary.module.css";
-import {H} from "../../components/Htag/Htag";
-import Htag from "../../components/Htag/Htag.module.css";
-import React, {useEffect, useState} from "react";
-import {withSummaryAdvertLayout} from "../../Layout/SummaryAdvertLayout/SummaryAdvertLayout";
-import {List} from "../../components/List/List";
-import {Badge} from "../../components/Badge/Badge";
+import cn from "classnames"
+import React, { useEffect, useState } from "react"
+import { Link, useLocation } from "react-router-dom"
+import { withSummaryAdvertLayout } from "../../Layout/SummaryAdvertLayout/SummaryAdvertLayout"
+import { Badge } from "../../components/Badge/Badge"
+import { Button } from "../../components/Button/Button"
+import { Comment } from "../../components/Comment/Comment"
+import { H } from "../../components/Htag/Htag"
+import Htag from "../../components/Htag/Htag.module.css"
+import { List } from "../../components/List/List"
 import list from "../../components/List/List.module.css"
-import {Button} from "../../components/Button/Button";
-import {Link, useLocation} from "react-router-dom";
-import {getDataAll} from "../advert/advert";
-export function AdvertCatalog(): JSX.Element {
+import { Textarea } from '../../components/Textarea/Textarea'
+import Send from "../../images/send.svg"
+import SendHover from "../../images/sendHover.svg"
+import styles from "../../style/summary.module.css"
+import { getDataAll } from "../advert/advert"
+export function AdvertCatalog() {
 
-    const [heroName, setHeroName] = useState("");
-    const [heroDesc, setHeroDesc] = useState("");
-    const [actorName, setActorName] = useState("");
-    const [filmYear, setFilmYear] = useState("");
-    const [filmName, setFilmName] = useState("");
-    const [facts, setFacts] = useState([]);
-    const [importantFact, setImportantFact] = useState([]);
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [heroPics, setHeroPics] = useState([]);
-    const [actorPic, setActorPic] = useState("");
+    const [heroName, setHeroName] = useState("")
+    const [heroDesc, setHeroDesc] = useState("")
+    const [actorName, setActorName] = useState("")
+    const [filmYear, setFilmYear] = useState("")
+    const [filmName, setFilmName] = useState("")
+    const [facts, setFacts] = useState([])
+    const [importantFact, setImportantFact] = useState([])
+    const [selectedTags, setSelectedTags] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState([])
+    const [heroPics, setHeroPics] = useState([])
+    const [actorPic, setActorPic] = useState("")
 
-    const { search } = useLocation();
-    const params = new URLSearchParams(search);
-    const advertId = params.get("advert_id");
+    const { search } = useLocation()
+    const params = new URLSearchParams(search)
+    const advertId = params.get("advert_id")
 
     useEffect(() => {
         getDataAll().then((storedData) => {
             if (storedData) {
-                const ad = storedData[advertId];
-                setHeroDesc(ad.heroDesc);
-                setHeroName(ad.heroName);
-                setActorName(ad.actorName);
-                setFilmName(ad.filmName);
-                setFilmYear(ad.filmYear);
-                setFacts(ad.facts);
-                setImportantFact(ad.importantFact);
-                setHeroPics(ad.heroPics);
-                setActorPic(ad.actorPic);
-                setSelectedCategories(ad.selectedCategories);
-                setSelectedTags(ad.selectedTags);
+                const ad = storedData[advertId]
+                setHeroDesc(ad.heroDesc)
+                setHeroName(ad.heroName)
+                setActorName(ad.actorName)
+                setFilmName(ad.filmName)
+                setFilmYear(ad.filmYear)
+                setFacts(ad.facts)
+                setImportantFact(ad.importantFact)
+                setHeroPics(ad.heroPics)
+                setActorPic(ad.actorPic)
+                setSelectedCategories(ad.selectedCategories)
+                setSelectedTags(ad.selectedTags)
             }
-        });
-}, [advertId]);
+        })
+    }, [advertId])
 
 
     return <>
         <div className={cn(styles.title_block)}>
             <H type={"h2"} className={cn(styles.title, Htag.h2)}>Приятного чтения интересных фактов о {heroName}</H>
             <H type={"h3"} className={cn(styles.title_mobile, Htag.h3)}>Приятного чтения интересных фактов о {heroName}</H>
-            <H type={"body"} className={cn(styles.text, Htag.body)}>Если вы с чем-то не согласны, не судите автора строго,<br/>напишите в поддержку на главной странице сайта</H>
+            <H type={"body"} className={cn(styles.text, Htag.body)}>Если вы с чем-то не согласны, не судите автора строго,<br />напишите в поддержку на главной странице сайта</H>
         </div>
         <div className={cn(styles.advert)}>
             <List orientation={"vertical"} className={cn(list.v_ul, styles.ul)}>
@@ -85,12 +89,12 @@ export function AdvertCatalog(): JSX.Element {
         </div>
         <div className={styles.img_block}>
             <div className={styles.img_container}>
-                <img src={actorPic} alt={"actorPic"} className={styles.img}/>
+                <img src={actorPic} alt={"actorPic"} className={styles.img} />
             </div>
             <H type={"h2"} className={cn(Htag.h2, styles.arrow)}>➜</H>
             {heroPics.map((pic, index) => (
                 <div key={index} className={styles.img_container}>
-                    <img src={pic} alt={"heroPic"} className={styles.img}/>
+                    <img src={pic} alt={"heroPic"} className={styles.img} />
                 </div>
             ))}
         </div>
@@ -102,15 +106,33 @@ export function AdvertCatalog(): JSX.Element {
             </div>
         </div>
         {facts.length >= 1 ?
-        <div className={styles.Fact}>
-            <H type={"h2"}>Факты:</H>
-            {facts.map((fact, index)=>(
-                <div key={index} className={styles.fact}>
-                    <H type={"h3"}>{fact?.fact}</H>
-                    <H type={"body"}>{fact?.desc}</H>
+            <div className={styles.Fact}>
+                <H type={"h2"}>Факты:</H>
+                {facts.map((fact, index) => (
+                    <div key={index} className={styles.fact}>
+                        <H type={"h3"}>{fact?.fact}</H>
+                        <H type={"body"}>{fact?.desc}</H>
+                    </div>
+                ))}
+            </div> : null}
+        <div className={cn(styles.comments)}>
+            <div className={cn(styles.commentsTitle)}>
+                <H type={'h2'}><span className={cn(styles.purple)}>Рецензии</span> пользователей</H>
+                <div className={cn(styles.circle)}>
+                    <H type={'h3'}>0</H>
                 </div>
-            ))}
-        </div> : null}
+            </div>
+            <div className={cn(styles.userComment)}>
+                <H type={'h3'}>Ваше <span className={cn(styles.purple)}>мнение</span></H>
+                <div className={cn(styles.commentForm)}>
+                    <Textarea placeholder={'Что думаете насчет статьи?'} />
+                    <Button type={'primary'} state={'default'} className={cn(styles.sendButton)} icon_url={Send} icon_url_hover={SendHover} />
+                </div>
+            </div>
+            <div className={cn(styles.commentsBlock)}>
+                <Comment />
+            </div>
+        </div>
         <div className={cn(styles.buttons, styles.catalogAdvert)}>
             <div></div>
             <Link to={"/catalog"}>
@@ -120,4 +142,4 @@ export function AdvertCatalog(): JSX.Element {
     </>
 }
 
-export default withSummaryAdvertLayout(AdvertCatalog);
+export default withSummaryAdvertLayout(AdvertCatalog)

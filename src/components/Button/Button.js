@@ -1,22 +1,25 @@
-import styles from "./Button.module.css";
-import cn from "classnames";
-import { useState } from "react";
+import cn from "classnames"
+import { useState } from "react"
+import styles from "./Button.module.css"
 export const Button = ({
   type,
   state,
   icon_url,
+  icon_url_hover,
   children,
   className,
   ...props
 }) => {
-  const [, setIsClicked] = useState(false);
+  const [, setIsClicked] = useState(false)
 
   const handleClick = () => {
     if (state === "disabled") {
-      return;
+      return
     }
-    setIsClicked(true);
-  };
+    setIsClicked(true)
+  }
+
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <button
@@ -34,6 +37,8 @@ export const Button = ({
         [styles.text]: type === "text",
         [styles.back]: type === "back",
       })}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
       {...props}
     >
@@ -41,11 +46,11 @@ export const Button = ({
         <></>
       ) : (
         <img
-            src={icon_url}
-            alt={"icon"}
+          src={isHovered ? icon_url_hover : icon_url}
+          alt={"icon"}
         />
       )}
       {children}
     </button>
-  );
-};
+  )
+}

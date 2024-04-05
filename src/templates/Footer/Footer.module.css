@@ -79,7 +79,7 @@
 }
 
 .pc {
-  align-self: flex-end;
+  text-align: end;
   margin-top: 7rem;
   color:var(--primary-dark-grey)!important;
 }

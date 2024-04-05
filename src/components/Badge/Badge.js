@@ -1,6 +1,6 @@
-import styles from './Badge.module.css';
-import cn from "classnames";
+import cn from "classnames"
 import Htag from "../Htag/Htag.module.css"
+import styles from './Badge.module.css'
 export const Badge = ({ type, children,checked,onChange, size = "default", className, ...props }) => {
 
     const handleClick = () => {
