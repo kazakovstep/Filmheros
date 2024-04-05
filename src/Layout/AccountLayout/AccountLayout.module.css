@@ -1,0 +1,14 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 22.5rem auto;
+    grid-template-areas:
+    "sidebar main";
+}
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+.main{
+    grid-area: main;
+}
