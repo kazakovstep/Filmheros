@@ -24,6 +24,7 @@ a {
   --primary-middle-grey: #cdcdcd;
   --primary-dark-grey: #a0a0a0;
   --primary-black: #232323;
+  --primary-purple: #78258d;
   --accent-light-yellow: #f9ffa7;
   --accent-bright-yellow: #f0fa77;
   --accent-dark-yellow: #e2f121;
@@ -32,4 +33,6 @@ a {
   --secondary-purple: #c092fd;
   --system-red: #fe6356;
   --system-green: #4efb82;
+  --system-purple: #F1ECF3;
+  --secondary-purple-light: #efefff;
 }

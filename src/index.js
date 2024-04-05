@@ -13,6 +13,10 @@ import New_password from "./pages/password/new_password"
 import Register from "./pages/register/Register"
 import reportWebVitals from './reportWebVitals'
 import './style/index.css'
+import Account from "./pages/account/account";
+import AccountArticles from "./pages/accountArticles/accountArticles";
+import AccountFeatures from "./pages/accountFeatures/accountFeatures";
+import AccountSettings from "./pages/accountSettings/accountSettings";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -27,6 +31,10 @@ ReactDOM.render(
             <Route path={"/advert/summary"} element={<Summary/>} />
             <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
             <Route path={"/"} element={<App/>}/>
+            <Route path={"/lk"} element={<Account/>}/>
+            <Route path={"/lk/articles"} element={<AccountArticles/>}/>
+            <Route path={"/lk/features"} element={<AccountFeatures/>}/>
+            <Route path={"/lk/settings"} element={<AccountSettings/>}/>
         </Routes>
     </BrowserRouter>
   </React.StrictMode>,
