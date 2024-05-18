@@ -76,3 +76,9 @@
     position: absolute;
     top:25vh;
 }
+
+.error{
+    font-size: 0.9rem;
+    text-align: center;
+    color: red;
+}
