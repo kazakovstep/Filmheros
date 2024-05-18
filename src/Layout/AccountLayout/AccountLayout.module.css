@@ -11,4 +11,6 @@
 
 .main{
     grid-area: main;
+    min-height: 100vh;
+    background-color: var(--system-purple);
 }

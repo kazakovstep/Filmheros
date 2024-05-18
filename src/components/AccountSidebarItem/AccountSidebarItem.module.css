@@ -4,6 +4,7 @@
     gap: 10px;
     border-radius: 0.62rem;
     align-items: center;
+    transition: all 0.3s ease-in-out ;
 }
 
 .active{
@@ -11,7 +12,40 @@
     color: var(--primary-purple);
 }
 
-.activeImg{
+.activeHomeImg path{
     fill: #78258d;
     stroke: #78258d;
+    transition: all 0.3s ease-in-out ;
 }
+
+.activeArticleImg{
+    stroke: #78258d;
+    transition: all 0.3s ease-in-out ;
+}
+
+.activeLikeImg path{
+    fill: #78258d;
+    stroke: #78258d;
+    transition: all 0.3s ease-in-out ;
+}
+
+.activeSettingsImg > path{
+    stroke: #78258d;
+    fill: #78258d;
+    transition: all 0.3s ease-in-out ;
+}
+
+.activeSettingsImg > path + path{
+    stroke: #78258d;
+    fill: var(--secondary-purple-light);
+    transition: all 0.3s ease-in-out ;
+}
+
+/*@keyframes animationScroll {*/
+/*    0%{*/
+/*        background-color: var(--secondary-purple-light);*/
+/*    }*/
+/*    100%{*/
+/*        margin-top: 50px;*/
+/*    }*/
+/*}*/

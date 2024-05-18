@@ -1,3 +1,50 @@
 .container{
-    min-height: 100vh;
+    padding-top: 32px;
+}
+
+.lkInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description{
+    margin-top: 20px;
+    max-width: 30.69rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.courses{
+    margin-top: 100px;
+    background-color: var(--primary-white);
+    border-radius: 1.25rem;
+}
+
+.coursesTitle,
+.articlesTitle{
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--secondary-purple-light);
+}
+
+.articlesTitle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Content{
+    padding: 30px 40px;
+}
+
+.latestArticles{
+    margin: 38px 0;
+    background-color: var(--primary-white);
+    border-radius: 1.25rem;
+}
+
+.articlesTitleBtn{
+    width: 7rem;
+    cursor: pointer;
+    padding: 0 !important;
 }

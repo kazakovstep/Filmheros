@@ -13,30 +13,34 @@ import New_password from "./pages/password/new_password"
 import Register from "./pages/register/Register"
 import reportWebVitals from './reportWebVitals'
 import './style/index.css'
+import {store} from './redux/store'
 import Account from "./pages/account/account";
 import AccountArticles from "./pages/accountArticles/accountArticles";
 import AccountFeatures from "./pages/accountFeatures/accountFeatures";
 import AccountSettings from "./pages/accountSettings/accountSettings";
+import {Provider} from "react-redux";
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-        <Routes>
-            <Route path={"/login"} element={<Login/>} />
-            <Route path={"/register"} element={<Register/>} />
-            <Route path={"/password_reset"} element={<Register_reset/>} />
-            <Route path={"/password_reset/verify"} element={<Verify/>} />
-            <Route path={"/password_reset/new_password"} element={<New_password/>} />
-            <Route path={"/advert"} element={<Advert/>} />
-            <Route path={"/catalog"} element={<Catalog/>} />
-            <Route path={"/advert/summary"} element={<Summary/>} />
-            <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
-            <Route path={"/"} element={<App/>}/>
-            <Route path={"/lk"} element={<Account/>}/>
-            <Route path={"/lk/articles"} element={<AccountArticles/>}/>
-            <Route path={"/lk/features"} element={<AccountFeatures/>}/>
-            <Route path={"/lk/settings"} element={<AccountSettings/>}/>
-        </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <Routes>
+                <Route path={"/login"} element={<Login/>} />
+                <Route path={"/register"} element={<Register/>} />
+                <Route path={"/password_reset"} element={<Register_reset/>} />
+                <Route path={"/password_reset/verify"} element={<Verify/>} />
+                <Route path={"/password_reset/new_password"} element={<New_password/>} />
+                <Route path={"/advert"} element={<Advert/>} />
+                <Route path={"/catalog"} element={<Catalog/>} />
+                <Route path={"/advert/summary"} element={<Summary/>} />
+                <Route path={"/catalog/advert"} element={<AdvertCatalog/>} />
+                <Route path={"/"} element={<App/>}/>
+                <Route path={"/lk"} element={<Account/>}/>
+                <Route path={"/lk/articles"} element={<AccountArticles/>}/>
+                <Route path={"/lk/features"} element={<AccountFeatures/>}/>
+                <Route path={"/lk/settings"} element={<AccountSettings/>}/>
+            </Routes>
+        </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
