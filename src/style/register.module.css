@@ -27,6 +27,7 @@
 .form {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     align-items: center;
     width: 60%;
 }
@@ -63,5 +64,11 @@
 
 .a{
     width: 100%;
+}
+
+.error{
+    font-size: 0.9rem;
+    text-align: center;
+    color: red;
 }
 

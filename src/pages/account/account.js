@@ -3,7 +3,7 @@ import styles from '../../style/Account.module.css'
 import {withAccountLayout} from "../../Layout/AccountLayout/AccountLayout";
 import {H} from "../../components/Htag/Htag";
 import groot from '../../images/lkImg.png'
-import {useGetTestQuery} from "../../redux/api/TestAPI.js";
+import {useGetTestQuery} from "../../redux/api/user.api.js";
 import {Button} from "../../components/Button/Button";
 import {Link} from "react-router-dom";
 import ArticleCard, {IArticleCard} from "../../components/ArticleCard/ArticleCard";
