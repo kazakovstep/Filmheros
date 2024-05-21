@@ -68,25 +68,6 @@ const Account = () => {
                     Вы ещё не опубликовывали статьи
                 </div>
             </div>
-            <div className={styles.latestArticles}>
-                <div className={styles.articlesTitle}>
-                    <H type={"h3"}>
-                        Последние статьи
-                    </H>
-                    <Link to={"/catalog"}>
-                        <Button type={"text"} className={styles.articlesTitleBtn}>
-                            Все статьи
-                        </Button>
-                    </Link>
-                </div>
-                <div className={styles.Content}>
-                    {array.map((el) => {
-                        return(
-                            <ArticleCard title={el.heroName} date={el.date} shortDescription={el.shortDescription} selectedTags={el.selectedTags}/>
-                        )
-                    })}
-                </div>
-            </div>
         </div>
     );
 };

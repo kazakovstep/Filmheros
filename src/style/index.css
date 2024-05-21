@@ -36,3 +36,12 @@ a {
   --system-purple: #F1ECF3;
   --secondary-purple-light: #efefff;
 }
+
+.logo{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-dark-grey);
+  background: url("../images/deadpoll.png");
+  background-size: cover;
+}
