@@ -14,7 +14,7 @@ const AccountArticles = () => {
         <div className={styles.container}>
             <div className={styles.titleContainer}>
                 <H type={"h2"}>
-                    {articles.length > 0 ? "Здесь представлены все составленные вами статьи" : "Вы пока не опубликовали ни одной статьи"}
+                    {articles?.length > 0 ? "Здесь представлены все составленные вами статьи" : "Вы пока не опубликовали ни одной статьи"}
                 </H>
             </div>
             <div className={styles.content}>

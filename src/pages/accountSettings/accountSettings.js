@@ -14,44 +14,109 @@ const AccountSettings = () => {
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [oldPassword, setOldPassword] = useState('');
-    const [photo, setPhoto] = useState("");
 
     useEffect(() => {
-        setUsername(data?.username);
+        setUsername(data?.userName);
         setEmail(data?.email);
-        setPhoto(data?.photo);
     }, [data]);
+
+    const [error, setError] = useState(false);
 
     const handleSave = async () => {
         const user = {
             userName: username,
             email,
-            oldPassword: oldPassword || undefined,
-            newPassword: newPassword || undefined,
-            photo
+            oldPassword: oldPassword || null,
+            newPassword: newPassword || null,
+            photo: avatr.substring(avatr.indexOf(",") + 1) || null
         };
-
-        await updateUser(user);
+        console.log(user)
+        try {
+            await updateUser(user).unwrap();
+            setIsSuccess(true);
+        } catch (err) {
+            if (err.status === 401) {
+                setError(true);
+            } else {
+                setError(false)
+            }
+        }
     };
+
+    const [file, setFile] = useState("");
+
+    useEffect(() => {
+        console.log(data?.photo)
+        try {
+            fetch(`http://localhost:8080/api/v1/image/${data?.photo}`, {
+                method: "POST",
+            }).then(response => response.blob())
+                .then(data => {
+                    const file = new File([data], 'image.jpg', {type: 'image/jpeg'});
+                    setFile(URL.createObjectURL(file));
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (error) {
+            console.log(error)
+        }
+    }, [data, data?.photo])
+
 
     const handleInputChange = (setter) => (e) => setter(e.target.value);
 
+    const [avatr, setAvatr] = useState("");
+
     const changeLogo = (event) => {
         let file = event.target.files[0];
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            let logo = document.getElementsByClassName('logo')[0];
-            logo.style.backgroundImage = `url(${e.target.result})`;
-        };
-        setPhoto(reader.readAsDataURL(file));
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                setAvatr(e.target.result);
+                let logo = document.getElementsByClassName('logo')[0];
+                logo.style.backgroundImage = `url(${e.target.result})`;
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const triggerFileInput = () => {
         document.getElementById('fileInput').click();
     };
 
+    const [isSuccess, setIsSuccess] = useState(false);
+
+
+    useEffect(() => {
+        if (isSuccess) {
+            const timer = setTimeout(() => {
+                setIsSuccess(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+        if (error) {
+            const timer = setTimeout(() => {
+                setError(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [isSuccess, error]);
+
     return (
         <div className={styles.container}>
+            {isSuccess ?
+                <div className={styles.success}>
+                    <H type={"h3"}>СЭР, ВЫ ВОСХИТИТЕЛЬНЫ, СЭР</H>
+                </div>
+                : null}
+            {error ?
+                <div className={styles.error}>
+                    <H type={"h3"}>СЭР, НИКАКИХ ИЗМЕНЕНИЙ, СЭР</H>
+                </div>
+                : null}
             <div className={styles.titleContainer}>
                 <H type="h2">
                     Здесь вы можете изменить настройки аккаунта
@@ -59,7 +124,9 @@ const AccountSettings = () => {
             </div>
             <div className={styles.inputContainer}>
                 <div style={{cursor: "pointer"}}>
-                    <div className="logo" onClick={triggerFileInput}></div>
+                    <div className="logo" onClick={triggerFileInput}>
+                        <img src={file && !avatr ? file : avatr} alt={""} className={styles.avatr}/>
+                    </div>
                     <input
                         id="fileInput"
                         className={styles.hiddenInput}

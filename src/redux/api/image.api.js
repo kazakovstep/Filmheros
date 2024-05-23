@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-const BASE_URL_IMAGE = "http://localhost:8080/api/v1/image";
+const BASE_URL_IMAGE = `http://${process.env.REACT_APP_API_URL}0/api/v1/image`;
 
 export const imageApi = createApi({
     reducerPath: 'imageApi',
