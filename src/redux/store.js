@@ -12,29 +12,35 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {authApi} from "./api/auth.api";
+import {articleApi} from "./api/article.api";
+import {imageApi} from "./api/image.api";
+import {reducer as filterReducer} from "./slices/filter.slice";
 
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    blacklist: [userApi.reducerPath, authApi.reducerPath]
+    blacklist: [userApi.reducerPath, authApi.reducerPath, articleApi.reducerPath, imageApi.reducerPath, filterReducer]
 }
 
 const reducers = combineReducers({
+    filter: filterReducer,
     [userApi.reducerPath]: userApi.reducer,
-    [authApi.reducerPath]: authApi.reducer
+    [authApi.reducerPath]: authApi.reducer,
+    [articleApi.reducerPath]: articleApi.reducer,
+    [imageApi.reducerPath]: imageApi.reducer
 })
 
 const persistRedusers = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
-    reducer: persistRedusers,
+    reducer: reducers,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(userApi.middleware).concat(authApi.middleware)
+        }).concat(userApi.middleware).concat(authApi.middleware).concat(articleApi.middleware).concat(imageApi.middleware)
 })
 
 export const persistor = persistStore(store);

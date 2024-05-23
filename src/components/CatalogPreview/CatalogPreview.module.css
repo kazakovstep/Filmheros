@@ -16,6 +16,7 @@
 }
 
 .actual_block{
+    width: 100%;
     display: flex;
     gap:1.25rem;
     margin-bottom: 2.5rem;
@@ -31,7 +32,7 @@
   display: flex;
   justify-content: center;
   width: 6rem;
-  height: 5rem;
+  height: 6rem;
   gap: 1.25rem;
 }
 .logo {
@@ -85,7 +86,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    width: 35%;
+    width: 25%;
     gap: 1.25rem;
 }
 .link_block{

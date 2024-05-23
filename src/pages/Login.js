@@ -20,7 +20,7 @@ export const Login = () => {
     const [isEmailValid, setEmailValid] = useState(true);
     const [isPasswordValid, setPasswordValid] = useState(true);
 
-    const [loginUser, {isLoading, isSuccess, isError, data, error}] = useLoginMutation();
+    const [login, {isLoading, isSuccess, isError, data, error}] = useLoginMutation();
 
     const handleLogin = async () => {
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -44,10 +44,10 @@ export const Login = () => {
 
         if (emailRegex.test(email) && passwordRegex.test(password)) {
             try {
-                const user = {email, password};
-                await loginUser(user).unwrap();
+                const user = JSON.stringify({email, password});
+                await login(user).unwrap();
             } catch (err) {
-                console.error('Failed to add user: ', err.data);
+                console.error('Failed to login user: ', err);
             }
         }
     };
@@ -59,7 +59,7 @@ export const Login = () => {
             setPasswordState("default");
             setEmailState("default");
         }
-        if (isSuccess) {
+        if(isSuccess){
             window.location.href = "/catalog"
         }
     }, [isError, isSuccess]);
@@ -72,7 +72,8 @@ export const Login = () => {
                     Вход в аккаунт
                 </H>
                 <div className={cn(styles.form)}>
-                    <H type={"body"} className={cn(styles.error, Htag.body)}>{isError ? "Пользователя не существует":  null}</H>
+                    <H type={"body"}
+                       className={cn(styles.error, Htag.body)}>{isError ? "Пользователя не существует" : null}</H>
                     <Input
                         type={"email"}
                         state={emailState}

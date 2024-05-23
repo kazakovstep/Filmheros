@@ -9,7 +9,7 @@ import {Button} from "../../components/Button/Button";
 import {withAuthLayout} from "../../Layout/AuthLayout/AuthLayout";
 import {Logo} from "../../components/Logo/Logo";
 import {Link} from "react-router-dom";
-import {useAddUserMutation} from "../../redux/api/user.api";
+import {useAddUserMutation} from "../../redux/api/auth.api";
 
 function RegisterIndex(): JSX.Element {
     const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ function RegisterIndex(): JSX.Element {
 
         if (emailRegex.test(email) && passwordRegex.test(password)) {
             try {
-                const user = {email, password};
+                const user = JSON.stringify({email, password});
                 await addUser(user).unwrap();
             } catch (err) {
                 console.error('Failed to add user: ', err.data);

@@ -6,25 +6,28 @@ export const userApi = createApi({
     reducerPath: 'userApi',
     tagTypes: ['User'],
     baseQuery: fetchBaseQuery({
-        baseUrl: BASE_URL_USERS
+        baseUrl: BASE_URL_USERS,
+        credentials: "include"
     }),
     endpoints: (builder) => ({
-        addUser: builder.mutation({
+        getCurrentUser: builder.query({
+            query: () => ({
+                url: `/user`
+            })
+        }),
+        getMyArticle: builder.query({
+            query: () => "/my-articles"
+        }),
+        updateUser: builder.mutation({
             query: (user) => ({
+                url: `/change`,
                 body: user,
-                url: "/add",
-                method: 'POST'
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'PUT'
             })
         })
     })
 });
-export const {useAddUserMutation} = userApi;
-
-export interface User {
-    userId: number;
-    userName: string;
-    email: string;
-    password: string;
-    photo: string;
-    roles: string;
-}
+export const {useGetCurrentUserQuery, useGetMyArticleQuery, useUpdateUserMutation} = userApi;

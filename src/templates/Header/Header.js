@@ -5,24 +5,24 @@ import buttonStyle from "../../components/Button/Button.module.css"
 import { Logo } from "../../components/Logo/Logo"
 import { Menu } from "../../components/Menu/Menu"
 import header from "./Header.module.css"
+import {useGetCurrentUserQuery} from "../../redux/api/user.api";
 export const Header = ({
     className,
     ...props
 }) => {
-
-    const user = localStorage.getItem('user')
+    const {data, isLoading, error} = useGetCurrentUserQuery();
 
     return (
         <header className={cn(header.header, className)}>
             <Logo />
             <nav className={header.nav_comp}>
                 <div className={cn(header.items, className)}>
-                    <Link to={user ? "/catalog" : "/login"} className={header.link}>
+                    <Link to={data ? "/catalog" : "/login"} className={header.link}>
                         <Button state={"default"} type={"text"} className={cn(header.textButton, className)}>Каталог</Button>
                     </Link>
                 </div>
-                <Link to={user ? "/advert" : "/login"} className={header.link}>
-                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>{user ? "Добавить статью" : "Войти"}</Button>
+                <Link to={data ? "/advert" : "/login"} className={header.link}>
+                    <Button state={"default"} type={"primary"} className={cn(buttonStyle.button, header.addButton)}>{data ? "Добавить статью" : "Войти"}</Button>
                 </Link>
             </nav>
             <nav className={header.nav_mob}>

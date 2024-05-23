@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import App from './pages/App'
 import Login from './pages/Login'
 import Advert from "./pages/advert/advert"
-import Summary from "./pages/advert/summary"
 import Catalog from "./pages/catalog/Catalog"
 import AdvertCatalog from "./pages/catalog/advert"
 import Register_reset from "./pages/password/Password_reset"
@@ -24,7 +23,7 @@ import {PersistGate} from "redux-persist/integration/react";
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <PersistGate persistor={persistor} loading={null}>
+            {/*<PersistGate persistor={persistor} loading={null}>*/}
                 <BrowserRouter>
                     <Routes>
                         <Route path={"/login"} element={<Login/>}/>
@@ -34,8 +33,7 @@ ReactDOM.render(
                         <Route path={"/password_reset/new_password"} element={<New_password/>}/>
                         <Route path={"/advert"} element={<Advert/>}/>
                         <Route path={"/catalog"} element={<Catalog/>}/>
-                        <Route path={"/advert/summary"} element={<Summary/>}/>
-                        <Route path={"/catalog/advert"} element={<AdvertCatalog/>}/>
+                        <Route path={"/catalog/article"} element={<AdvertCatalog/>}/>
                         <Route path={"/"} element={<App/>}/>
                         <Route path={"/lk"} element={<Account/>}/>
                         <Route path={"/lk/articles"} element={<AccountArticles/>}/>
@@ -43,7 +41,7 @@ ReactDOM.render(
                         <Route path={"/lk/settings"} element={<AccountSettings/>}/>
                     </Routes>
                 </BrowserRouter>
-            </PersistGate>
+            {/*</PersistGate>*/}
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')

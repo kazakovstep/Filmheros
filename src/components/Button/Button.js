@@ -31,7 +31,6 @@ export const Button = ({
         "disabled secondary": state === "disabled" && type === "secondary",
         "disabled text": state === "disabled" && type === "text",
         "disabled back": state === "disabled" && type === "back",
-        "default text": state === "default" && type === "text",
         [styles.primary]: type === "primary",
         [styles.secondary]: type === "secondary",
         [styles.text]: type === "text",
