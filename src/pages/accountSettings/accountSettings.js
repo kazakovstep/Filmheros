@@ -8,6 +8,7 @@ import {useGetCurrentUserQuery, useUpdateUserMutation} from "../../redux/api/use
 import Exit from "../../images/exit.svg"
 import ExitHover from "../../images/exit_hover.svg"
 import {useLogoutMutation} from "../../redux/api/auth.api";
+import PersonSVG from "../../images/person.svg"
 
 const AccountSettings = () => {
     const {data} = useGetCurrentUserQuery();
@@ -48,10 +49,21 @@ const AccountSettings = () => {
     const [file, setFile] = useState("");
 
     useEffect(() => {
+        console.log(file)
+    }, [file])
+
+    useEffect(() => {
         try {
             fetch(`http://localhost:8080/api/v1/image/${data?.photo}`, {
                 method: "POST",
-            }).then(response => response.blob())
+            })
+                .then(response => {
+                    console.log(response);
+                    if (!response.ok) {
+                        throw new Error(`${response.status}: ${response.statusText}`);
+                    }
+                    return response.blob();
+                })
                 .then(data => {
                     const file = new File([data], 'image.jpg', {type: 'image/jpeg'});
                     setFile(URL.createObjectURL(file));
@@ -60,7 +72,7 @@ const AccountSettings = () => {
                     console.log(error);
                 });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }, [data, data?.photo]);
 
@@ -139,7 +151,8 @@ const AccountSettings = () => {
             <div className={styles.inputContainer}>
                 <div style={{cursor: "pointer"}}>
                     <div className="logo" onClick={triggerFileInput}>
-                        <img src={file && !avatr ? file : avatr} alt={""} className={styles.avatr}/>
+                        {file || avatr ? <img src={file && !avatr ? file : avatr} alt={""} className={styles.avatr}/> :
+                            <img src={PersonSVG} alt={""} className={styles.avatr}/>}
                     </div>
                     <input
                         id="fileInput"

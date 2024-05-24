@@ -41,7 +41,6 @@ a {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: url("../components/Comment/person.svg");
     background-size: cover;
 }
 .logo:hover {
