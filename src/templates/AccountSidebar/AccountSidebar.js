@@ -10,20 +10,6 @@ import {Logo} from "../../components/Logo/Logo";
 
 
 const AccountSidebar = ({className, ...props}) => {
-    // const path = useLocation()
-    //
-    // switch (content){
-    //     case "Главная":
-    //         setHref(path.pathname)
-    //         break
-    //     case "Мои статьи":
-    //         setHref("/lk")
-    // }
-    //
-    //
-    // useEffect(() => {
-    //     console.log(path.pathname)
-    // }, [])
 
     return (
         <aside className={cn(styles.sidebar, className)} {...props}>

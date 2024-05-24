@@ -15,6 +15,11 @@ export const userApi = createApi({
                 url: `/user`
             })
         }),
+        getUser: builder.query({
+            query: (userId) => ({
+                url: `/${userId}`
+            })
+        }),
         getMyArticle: builder.query({
             query: () => "/my-articles"
         }),
@@ -27,7 +32,10 @@ export const userApi = createApi({
                 },
                 method: 'PUT'
             })
+        }),
+        getLikedArticle: builder.query({
+            query: () => "/liked-articles"
         })
     })
 });
-export const {useGetCurrentUserQuery, useGetMyArticleQuery, useUpdateUserMutation} = userApi;
+export const {useGetCurrentUserQuery, useGetMyArticleQuery, useUpdateUserMutation, useGetLikedArticleQuery, useGetUserQuery} = userApi;

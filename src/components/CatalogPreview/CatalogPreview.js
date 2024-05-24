@@ -10,7 +10,7 @@ import BadgeStyle from "../Badge/Badge.module.css"
 import React, {useEffect, useState} from "react";
 import Favourite from "../../images/favourite.svg"
 import Spider from "../../images/spider-man.jpg"
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {categories, tags} from "../../pages/advert/advert";
 import {useGetImageMutation} from "../../redux/api/image.api";
 import {useDoDislikeMutation, useDoLikeMutation} from "../../redux/api/article.api";
@@ -25,17 +25,16 @@ export const CatalogPreview = ({
                                    ...props
                                }): JSX.Element => {
 
-    const [isFavorite, setFavorite] = useState(false);
 
     const [doLike] = useDoLikeMutation();
     const [doDislike] = useDoDislikeMutation();
 
     const handleSetFavorite = async () => {
-        if(!isFavorite){
+        if (!isFavorite) {
             setAmountLikes((prev) => (prev + 1));
             await doLike(data?.articleId);
         }
-        if(isFavorite){
+        if (isFavorite) {
             setAmountLikes((prev) => (prev - 1));
             await doDislike(data?.articleId);
         }
@@ -48,33 +47,35 @@ export const CatalogPreview = ({
 
     useEffect(() => {
         setAmountLikes(data?.likeCount)
-        if(data?.userLikes?.includes(user?.userId)){
+        if (data?.userLikes?.includes(user?.userId)) {
             setFavorite(true);
         }
-    },[data])
+    }, [data])
 
     const heroPicIds = data?.heroPics.split(", ")[0];
 
     const [file, setFile] = useState();
 
     useEffect(() => {
-            try {
-                fetch(`http://localhost:8080/api/v1/image/${heroPicIds}`, {
-                    method: "POST",
-                }).then(response => response.blob())
-                    .then(data => {
-                        const file = new File([data], 'image.jpg', {type: 'image/jpeg'});
-                        setFile(URL.createObjectURL(file));
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            } catch (error) {
-                console.log(error)
-            }
-        }, [data]
-    )
+        try {
+            fetch(`http://localhost:8080/api/v1/image/${heroPicIds}`, {
+                method: "POST",
+            }).then(response => response.blob())
+                .then(data => {
+                    const file = new File([data], 'image.jpg', {type: 'image/jpeg'});
+                    setFile(URL.createObjectURL(file));
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (error) {
+            console.log(error)
+        }
+    }, [data])
 
+    const location = useLocation();
+    const currentUrl = location.pathname;
+    const [isFavorite, setFavorite] = useState(currentUrl === "/lk/features" || false);
 
     return (
         <>
@@ -109,6 +110,8 @@ export const CatalogPreview = ({
                         </div>
                     </div>
                 </Link>
+                {currentUrl === "/lk/articles" ?
+                    <Button type={"text"} style={{cursor: "pointer"}}>Удалить</Button> : null}
                 <div className={styles.like_container}>
                     <div className={styles.stats_blocks}>
                         <div className={styles.stats_block}>
@@ -118,8 +121,9 @@ export const CatalogPreview = ({
                         </div>
                     </div>
                     {isFavorite ?
-                        <Button type={"text"} state={"default"} onClick={handleSetFavorite}>В избранном</Button> :
-                        <Button type={"text"} state={"default"} onClick={handleSetFavorite}>Добавить в
+                        <Button type={"text"} style={{cursor: "pointer"}} onClick={handleSetFavorite}>В
+                            избранном</Button> :
+                        <Button type={"text"} style={{cursor: "pointer"}} onClick={handleSetFavorite}>Добавить в
                             избранное</Button>
                     }
                 </div>

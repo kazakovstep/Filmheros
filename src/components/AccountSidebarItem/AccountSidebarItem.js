@@ -91,7 +91,7 @@ export const AccountSidebarItem = ({content, ...props}: AccountSidebarItemProps)
                                 content === "Избранное" ? <LikeImg className={active ? styles.activeLikeImg : null}/> :
                                     content === "Настройки" ? <SettingsImg className={active ? styles.activeSettingsImg : null}/> : null
                     }
-                    <H type={'body-bold'}>
+                    <H type={'h3'} style={{fontSize: "15px"}}>
                         {content}
                     </H>
                 </li>

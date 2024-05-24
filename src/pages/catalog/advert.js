@@ -15,6 +15,7 @@ import SendHover from "../../images/sendHover.svg"
 import styles from "../../style/summary.module.css"
 import {useGetArticleQuery} from "../../redux/api/article.api";
 import {categories, tags} from "../advert/advert";
+import {useAddCommentMutation} from "../../redux/api/comment.api";
 
 export function AdvertCatalog() {
     const {search} = useLocation()
@@ -25,6 +26,11 @@ export function AdvertCatalog() {
 
     const [heroPics, setHeroPics] = useState([]);
     const [actorPic, setActorPic] = useState();
+    const [comments, setComments] = useState(article?.comments || []);
+
+    useEffect(() => {
+        setComments(article?.comments || []);
+    }, [article]);
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -58,6 +64,23 @@ export function AdvertCatalog() {
 
         fetchImages();
     }, [article]);
+
+    const [commentText, setCommentText] = useState('');
+    const [addComment, {isLoading}] = useAddCommentMutation();
+
+    const handleAddComment = async () => {
+        try {
+            const newComment = {
+                articleId,
+                text: commentText,
+            }
+            await addComment(newComment).unwrap();
+            setComments([...comments, newComment]);
+            setCommentText('');
+        } catch (error) {
+            console.log('Failed to add comment:', error);
+        }
+    };
 
 
     return <>
@@ -128,19 +151,23 @@ export function AdvertCatalog() {
             <div className={cn(styles.commentsTitle)}>
                 <H type={'h2'}><span className={cn(styles.purple)}>Рецензии</span> пользователей</H>
                 <div className={cn(styles.circle)}>
-                    <H type={'h3'}>0</H>
+                    <H type={'h3'}>{article?.comments?.length}</H>
                 </div>
             </div>
             <div className={cn(styles.userComment)}>
                 <H type={'h3'}>Ваше <span className={cn(styles.purple)}>мнение</span></H>
                 <div className={cn(styles.commentForm)}>
-                    <Textarea placeholder={'Что думаете насчет статьи?'}/>
+                    <Textarea placeholder={'Что думаете насчет статьи?'}
+                              value={commentText}
+                              onChange={(e) => setCommentText(e.target.value)}/>
                     <Button type={'primary'} state={'default'} className={cn(styles.sendButton)} icon_url={Send}
-                            icon_url_hover={SendHover}/>
+                            icon_url_hover={SendHover} onClick={handleAddComment}/>
                 </div>
             </div>
             <div className={cn(styles.commentsBlock)}>
-                <Comment/>
+                {comments?.map(comment => (
+                    <Comment data={comment}/>
+                ))}
             </div>
         </div>
         <div className={cn(styles.buttons, styles.catalogAdvert)}>

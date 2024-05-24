@@ -36,12 +36,21 @@
   width:40%!important;
 }
 .textButton{
+  background-color: var(--primary-black);
   color: var(--primary-white)!important;
+}
+.textButton:hover{
+  color: var(--accent-bright-yellow) !important;
 }
 .input{
   justify-content: center;
   align-self: center!important;
   width: 60%!important;
+}
+.width{
+  width: 100%!important;
+  justify-content: space-between!important;
+  padding-left: 30%;
 }
 .items{
   display: inline-flex;
@@ -60,8 +69,14 @@
   margin-top: 5%;
   margin-right: 34%;
 }
+.avatr{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
 .link button{
   width: 100%!important;
+  padding: 5px;
 }
 .link{
   align-self: center;

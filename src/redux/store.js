@@ -15,12 +15,13 @@ import {authApi} from "./api/auth.api";
 import {articleApi} from "./api/article.api";
 import {imageApi} from "./api/image.api";
 import {reducer as filterReducer} from "./slices/filter.slice";
+import {commentApi} from "./api/comment.api";
 
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    blacklist: [userApi.reducerPath, authApi.reducerPath, articleApi.reducerPath, imageApi.reducerPath, filterReducer]
+    blacklist: [userApi.reducerPath, authApi.reducerPath, articleApi.reducerPath, imageApi.reducerPath, commentApi.reducerPath, filterReducer]
 }
 
 const reducers = combineReducers({
@@ -28,7 +29,8 @@ const reducers = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [articleApi.reducerPath]: articleApi.reducer,
-    [imageApi.reducerPath]: imageApi.reducer
+    [imageApi.reducerPath]: imageApi.reducer,
+    [commentApi.reducerPath]: commentApi.reducer,
 })
 
 const persistRedusers = persistReducer(persistConfig, reducers)
@@ -40,7 +42,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(userApi.middleware).concat(authApi.middleware).concat(articleApi.middleware).concat(imageApi.middleware)
+        }).concat(userApi.middleware).concat(authApi.middleware).concat(articleApi.middleware).concat(imageApi.middleware).concat(commentApi.middleware)
 })
 
 export const persistor = persistStore(store);

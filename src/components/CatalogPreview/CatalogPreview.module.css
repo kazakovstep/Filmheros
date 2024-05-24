@@ -86,11 +86,11 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    width: 25%;
+    width: 20%;
     gap: 1.25rem;
 }
 .link_block{
-    width: 75%;
+    width: 70%;
     display: flex;
     gap:1.25rem;
 }

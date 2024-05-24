@@ -13,7 +13,7 @@ const CatalogLayout = ({ children }): JSX.Element => {
             <CatalogSidebar className={styles.sidebarr}/>
             <div className={cn(styles.account_container)}>
                 <Main type={"account"}>
-                    <div>
+                    <div style={{width: "100%"}}>
                         {children}
                     </div>
                 </Main>

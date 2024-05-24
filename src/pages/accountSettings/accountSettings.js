@@ -5,6 +5,9 @@ import {Input} from "../../components/Input/Input";
 import {H} from "../../components/Htag/Htag";
 import {Button} from "../../components/Button/Button";
 import {useGetCurrentUserQuery, useUpdateUserMutation} from "../../redux/api/user.api";
+import Exit from "../../images/exit.svg"
+import ExitHover from "../../images/exit_hover.svg"
+import {useLogoutMutation} from "../../redux/api/auth.api";
 
 const AccountSettings = () => {
     const {data} = useGetCurrentUserQuery();
@@ -30,7 +33,6 @@ const AccountSettings = () => {
             newPassword: newPassword || null,
             photo: avatr.substring(avatr.indexOf(",") + 1) || null
         };
-        console.log(user)
         try {
             await updateUser(user).unwrap();
             setIsSuccess(true);
@@ -46,7 +48,6 @@ const AccountSettings = () => {
     const [file, setFile] = useState("");
 
     useEffect(() => {
-        console.log(data?.photo)
         try {
             fetch(`http://localhost:8080/api/v1/image/${data?.photo}`, {
                 method: "POST",
@@ -61,8 +62,7 @@ const AccountSettings = () => {
         } catch (error) {
             console.log(error)
         }
-    }, [data, data?.photo])
-
+    }, [data, data?.photo]);
 
     const handleInputChange = (setter) => (e) => setter(e.target.value);
 
@@ -104,6 +104,20 @@ const AccountSettings = () => {
             return () => clearTimeout(timer);
         }
     }, [isSuccess, error]);
+
+    const [logout] = useLogoutMutation();
+
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+        } catch (error) {
+            if (error.status !== 403) {
+                console.error("Произошла ошибка при разлогине:", error);
+            }
+        } finally {
+            window.location.href = "/catalog";
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -167,14 +181,26 @@ const AccountSettings = () => {
                     value={newPassword}
                     onChange={handleInputChange(setNewPassword)}
                 />
-                <Button
-                    state="default"
-                    type="primary"
-                    className={styles.btn}
-                    onClick={handleSave}
-                >
-                    Сохранить
-                </Button>
+                <div style={{display: "flex", gap: "1rem"}}>
+                    <Button
+                        state="default"
+                        type="primary"
+                        className={styles.btn}
+                        onClick={handleSave}
+                    >
+                        Сохранить
+                    </Button>
+                    <Button
+                        state="default"
+                        type="primary"
+                        className={styles.btn}
+                        style={{width: "1rem"}}
+                        onClick={handleLogout}
+                        icon_url={Exit}
+                        icon_url_hover={ExitHover}
+                    >
+                    </Button>
+                </div>
             </div>
         </div>
     );

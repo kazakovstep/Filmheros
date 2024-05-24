@@ -108,7 +108,7 @@ function RegisterIndex(): JSX.Element {
                             Уже есть аккаунт?
                         </H>
                         <Link to={"/login"}>
-                            <Button state={"default"} type={"text"}>
+                            <Button type={"text"}>
                                 Войти
                             </Button>
                         </Link>

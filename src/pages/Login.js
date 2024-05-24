@@ -110,14 +110,14 @@ export const Login = () => {
                             Ещё нет аккаунта?
                         </H>
                         <Link to={"/register"}>
-                            <Button state={"default"} type={"text"}>
+                            <Button type={"text"}>
                                 Зарегистрироваться
                             </Button>
                         </Link>
                     </div>
                     <div className={styles.button_forget}>
                         <Link to={"/password_reset"}>
-                            <Button state={"default"} type={"text"}>
+                            <Button type={"text"}>
                                 Забыли пароль?
                             </Button>
                         </Link>
